@@ -5,8 +5,8 @@ Copyright (c) Vladimir Dzhuvinov, 2009 - 2012
 
 README
 
-This package provides Java classes to represent, parse and serialise JSON-RPC
-2.0 requests, notifications and responses.
+Java classes to represent, parse and serialise JSON-RPC 2.0 requests, 
+notifications and responses.
 
 
 
@@ -15,8 +15,8 @@ Requirements:
 	* Java 1.6 or later
 	
 	* The package depends on the JSON Smart library for JSON encoding and
-	  decoding (this is a fork of the popular JSON.simple toolkit, but with
-	  more efficent parsing). Its classes are conveniently included in the 
+	  decoding (fork of the popular JSON.simple toolkit, but with more 
+	  efficent parsing). Its classes are conveniently included in the 
 	  distributed JAR so you don't have to download and install it 
 	  separately. JSON Smart is at http://code.google.com/p/json-smart/
 
@@ -26,7 +26,7 @@ Package content:
 
         README.txt                  This file.
         
-        LICENSE.txt                 The software license.
+        LICENSE.txt                 The software licence.
 	
 	CHANGELOG.txt               The change log.
 	
