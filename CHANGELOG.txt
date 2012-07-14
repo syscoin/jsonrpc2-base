@@ -159,5 +159,8 @@ version 1.26 (2012-07-08)
 	  retriever classes.
 
 version 1.27 (2012-07-14)
-	* Updates build.xml script.
+	* Deprecates JSONRPC2Message.toJSON() in favour of 
+	  JSONRPC2Message.toJSONObject().
+	* Updates build.xml script for automatic version number substitution and
+	  ZIP file generation.
 	* Updates JUnit JAR to 4.10.

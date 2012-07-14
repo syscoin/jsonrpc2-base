@@ -1,5 +1,6 @@
 package com.thetransactioncompany.jsonrpc2;
 
+
 import net.minidev.json.JSONObject;
 
 
@@ -52,7 +53,7 @@ import net.minidev.json.JSONObject;
  * <a href="http://groups.google.com/group/json-rpc">here</a>.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2011-08-05)
+ * @version $version$ (2012-07-14)
  */
 public class JSONRPC2Error extends Exception {
 	
@@ -155,11 +156,25 @@ public class JSONRPC2Error extends Exception {
 	
 	
 	/** 
-	 * Gets a JSON representation of the JSON-RPC 2.0 error.
+	 * Returns a JSON object representation of this JSON-RPC 2.0 error.
+	 *
+	 * <p>Use {@link #toJSONObject} instead.
 	 *
 	 * @return A JSON object representing this error object.
 	 */
+	@Deprecated
 	public JSONObject toJSON() {
+	
+		return toJSONObject();
+	}
+	
+	
+	/** 
+	 * Returns a JSON object representation of this JSON-RPC 2.0 error.
+	 *
+	 * @return A JSON object representing this error object.
+	 */
+	public JSONObject toJSONObject() {
 	
 		JSONObject out = new JSONObject();
 		

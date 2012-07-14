@@ -182,7 +182,7 @@ public class JSONRPC2Parser {
 	 * 2.0 messages. The member order of JSON objects will be preserved if
 	 * {@link #preserveOrder} is set to {@code true}.
 	 *
-	 * @param jsonString The JSON string to parse.
+	 * @param jsonString The JSON string to parse. Must not be {@code null}.
 	 *
 	 * @return The parsed JSON object.
 	 *
@@ -228,7 +228,7 @@ public class JSONRPC2Parser {
 	 * "2.0". This method is intended to check the "jsonrpc" attribute 
 	 * during parsing of JSON-RPC messages.
 	 *
-	 * @param version    The version parameter.
+	 * @param version    The version parameter. Must not be {@code null}.
 	 * @param jsonString The original JSON string.
 	 *
 	 * @throws JSONRPC2Exception If the parameter is not a string matching
@@ -259,7 +259,8 @@ public class JSONRPC2Parser {
 	 * and would provide you with more detailed parse error reporting.
 	 *
 	 * @param jsonString A JSON string representing a JSON-RPC 2.0 request, 
-	 *                   notification or response, UTF-8 encoded.
+	 *                   notification or response, UTF-8 encoded. Must not
+	 *                   be {@code null}.
 	 *
 	 * @return An instance of {@link JSONRPC2Request}, 
 	 *         {@link JSONRPC2Notification} or {@link JSONRPC2Response}.
@@ -271,6 +272,7 @@ public class JSONRPC2Parser {
 		throws JSONRPC2ParseException {
 	
 		// Try each of the parsers until one succeeds (or all fail)
+		
 		try {
 			return parseJSONRPC2Request(jsonString);
 
@@ -308,7 +310,8 @@ public class JSONRPC2Parser {
 	/** 
 	 * Parses a JSON-RPC 2.0 request string.
 	 *
-	 * @param jsonString The JSON-RPC 2.0 request string, UTF-8 encoded.
+	 * @param jsonString The JSON-RPC 2.0 request string, UTF-8 encoded. 
+	 *                   Must not be {@code null}.
 	 *
 	 * @return The corresponding JSON-RPC 2.0 request object.
 	 *
@@ -390,7 +393,7 @@ public class JSONRPC2Parser {
 	 * Parses a JSON-RPC 2.0 notification string.
 	 *
 	 * @param jsonString The JSON-RPC 2.0 notification string, UTF-8 
-	 *                   encoded.
+	 *                   encoded. Must not be {@code null}.
 	 *
 	 * @return The corresponding JSON-RPC 2.0 notification object.
 	 *
@@ -457,6 +460,7 @@ public class JSONRPC2Parser {
 	 * Parses a JSON-RPC 2.0 response string.
 	 *
 	 * @param jsonString The JSON-RPC 2.0 response string, UTF-8 encoded.
+	 *                   Must not be {@code null}.
 	 *
 	 * @return The corresponding JSON-RPC 2.0 response object.
 	 *

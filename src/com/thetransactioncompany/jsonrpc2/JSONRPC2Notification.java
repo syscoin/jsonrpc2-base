@@ -1,7 +1,8 @@
 package com.thetransactioncompany.jsonrpc2;
 
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 import net.minidev.json.JSONObject;
 
@@ -83,7 +84,7 @@ import net.minidev.json.JSONObject;
  * <a href="http://groups.google.com/group/json-rpc">here</a>.
  * 
  * @author Vladimir Dzhuvinov
- * @version $version$ (2011-07-10)
+ * @version $version$ (2012-07-14)
  */
 public class JSONRPC2Notification extends JSONRPC2Message {
 
@@ -111,7 +112,7 @@ public class JSONRPC2Notification extends JSONRPC2Message {
 	 * thread-safe.
 	 *
 	 * @param jsonString The JSON-RPC 2.0 notification string, UTF-8 
-	 *                   encoded.
+	 *                   encoded. Must not be {@code null}.
 	 *
 	 * @return The corresponding JSON-RPC 2.0 notification object.
 	 *
@@ -130,7 +131,7 @@ public class JSONRPC2Notification extends JSONRPC2Message {
 	 * thread-safe.
 	 *
 	 * @param jsonString    The JSON-RPC 2.0 notification string, UTF-8 
-	 *                      encoded.
+	 *                      encoded. Must not be {@code null}.
 	 * @param preserveOrder {@code true} to preserve the order of JSON 
 	 *                      object members in parameters.
 	 *
@@ -151,7 +152,7 @@ public class JSONRPC2Notification extends JSONRPC2Message {
 	 * thread-safe.
 	 *
 	 * @param jsonString    The JSON-RPC 2.0 notification string, UTF-8 
-	 *                      encoded.
+	 *                      encoded. Must not be {@code null}.
 	 * @param preserveOrder {@code true} to preserve the order of JSON 
 	 *                      object members in parameters.
 	 * @param ignoreVersion {@code true} to skip a check of the 
@@ -175,7 +176,7 @@ public class JSONRPC2Notification extends JSONRPC2Message {
 	 * thread-safe.
 	 *
 	 * @param jsonString            The JSON-RPC 2.0 notification string, 
-	 *                              UTF-8 encoded.
+	 *                              UTF-8 encoded. Must not be {@code null}.
 	 * @param preserveOrder         {@code true} to preserve the order of
 	 *                              JSON object members in parameters.
 	 * @param ignoreVersion         {@code true} to skip a check of the 
@@ -205,7 +206,8 @@ public class JSONRPC2Notification extends JSONRPC2Message {
 	/** 
 	 * Constructs a new JSON-RPC 2.0 notification with no parameters.
 	 *
-	 * @param method The name of the requested method.
+	 * @param method The name of the requested method. Must not be 
+	 *               {@code null}.
 	 */
 	public JSONRPC2Notification(final String method) {
 		
@@ -218,7 +220,8 @@ public class JSONRPC2Notification extends JSONRPC2Message {
 	 * Constructs a new JSON-RPC 2.0 notification with JSON array 
 	 * parameters.
 	 *
-	 * @param method The name of the requested method.
+	 * @param method The name of the requested method. Must not be 
+	 *               {@code null}.
 	 * @param params The notification parameters packed as a JSON array
 	 *               (<a href="#map">maps</a> to java.util.List).
 	 */
@@ -232,7 +235,8 @@ public class JSONRPC2Notification extends JSONRPC2Message {
 	/** 
 	 * Constructs a new JSON-RPC 2.0 notification JSON object parameters.
 	 *
-	 * @param method The name of the requested method.
+	 * @param method The name of the requested method. Must not be 
+	 *               {@code null}.
 	 * @param params The notification parameters packed as a JSON object
 	 *               (<a href="#map">maps</a> to java.util.Map).
 	 */
@@ -257,13 +261,13 @@ public class JSONRPC2Notification extends JSONRPC2Message {
 	/**
 	 * Sets the name of the requested method.
 	 *
-	 * @param method The method name.
+	 * @param method The method name. Must not be {@code null}.
 	 */
 	public void setMethod(final String method) {
 		
 		// The method name is mandatory
 		if (method == null)
-			throw new NullPointerException();
+			throw new IllegalArgumentException();
 
 		this.method = method;
 	}
@@ -320,11 +324,9 @@ public class JSONRPC2Notification extends JSONRPC2Message {
 	
 	
 	/** 
-	 * Gets a JSON representation of this JSON-RPC 2.0 notification.
-	 *
-	 * @return A JSON object representing the notification.
+	 * @inheritDoc
 	 */
-	public JSONObject toJSON() {
+	public JSONObject toJSONObject() {
 	
 		JSONObject notf = new JSONObject();
 		
@@ -341,13 +343,8 @@ public class JSONRPC2Notification extends JSONRPC2Message {
 		
 		if (nonStdAttributes != null) {
 		
-			Iterator<Map.Entry<String,Object>> it = nonStdAttributes.entrySet().iterator();
-			
-			while (it.hasNext()) {
-			
-				Map.Entry <String,Object> pair = it.next();
-				notf.put(pair.getKey(), pair.getValue());
-			}
+			for (final Map.Entry<String,Object> attr: nonStdAttributes.entrySet())
+				notf.put(attr.getKey(), attr.getValue());
 		}
 		
 		return notf;

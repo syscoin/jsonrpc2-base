@@ -18,7 +18,7 @@
  *
  * <p><b>Package dependencies:</b> The classes in this package rely on the 
  * {@code net.minidev.json} and {@code net.minidev.json.parser} packages 
- * (version 1.0.9 and compabile) for JSON encoding and decoding. You can obtain
+ * (version 1.1.1 and compabile) for JSON encoding and decoding. You can obtain
  * them from the <a href="http://code.google.com/p/json-smart/">JSON-Smart</a> 
  * website.
  *

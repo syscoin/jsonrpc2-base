@@ -1,7 +1,9 @@
 package com.thetransactioncompany.jsonrpc2;
 
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import net.minidev.json.JSONObject;
 
@@ -53,7 +55,7 @@ import net.minidev.json.JSONObject;
  * <a href="http://groups.google.com/group/json-rpc">here</a>.
  * 
  * @author Vladimir Dzhuvinov
- * @version $version$ (2011-07-09)
+ * @version $version$ (2012-07-14)
  */
 public abstract class JSONRPC2Message {
 
@@ -85,7 +87,8 @@ public abstract class JSONRPC2Message {
 	 * #parse(String,boolean,boolean)} method.
 	 *
 	 * @param jsonString A JSON string representing a JSON-RPC 2.0 request, 
-	 *                   notification or response, UTF-8 encoded.
+	 *                   notification or response, UTF-8 encoded. Must not
+	 *                   be {@code null}.
 	 *
 	 * @return An instance of {@link JSONRPC2Request}, 
 	 *         {@link JSONRPC2Notification} or {@link JSONRPC2Response}.
@@ -116,7 +119,7 @@ public abstract class JSONRPC2Message {
 	 *
 	 * @param jsonString    A JSON string representing a JSON-RPC 2.0 
 	 *                      request, notification or response, UTF-8
-	 *                      encoded.
+	 *                      encoded. Must not be {@code null}.
 	 * @param preserveOrder If {@code true} the member order of JSON objects
 	 *                      in parameters and results must be preserved.
 	 * @param ignoreVersion If {@code true} the {@code "jsonrpc":"2.0"}
@@ -139,9 +142,9 @@ public abstract class JSONRPC2Message {
 	
 	
 	/**
-	 * Appends a non-standard attribute to a JSON-RPC 2.0 message. This is 
-	 * done by adding a new member (key / value pair) to the JSON object 
-	 * representing the message.
+	 * Appends a non-standard attribute to this JSON-RPC 2.0 message. This is 
+	 * done by adding a new member (key / value pair) to the top level JSON 
+	 * object representing the message.
 	 *
 	 * <p>You may use this method to add meta and debugging attributes, 
 	 * such as the request processing time, to a JSON-RPC 2.0 message.
@@ -149,7 +152,8 @@ public abstract class JSONRPC2Message {
 	 * @param name  The attribute name. Must not conflict with the existing
 	 *              "method", "id", "params", "result", "error" and "jsonrpc"
 	 *              attributes reserved by the JSON-RPC 2.0 protocol, else 
-	 *              an {@code IllegalArgumentException} will be thrown.
+	 *              an {@code IllegalArgumentException} will be thrown. Must
+	 *              not be {@code null} either.
 	 * @param value The attribute value. Must be of type String, boolean,
 	 *              number, List, Map or null, else an
 	 *              {@code IllegalArgumentException} will be thrown.
@@ -188,10 +192,11 @@ public abstract class JSONRPC2Message {
 	/**
 	 * Retrieves a non-standard JSON-RPC 2.0 message attribute.
 	 *
-	 * @param name The name of the non-standard attribute to retrieve.
+	 * @param name The name of the non-standard attribute to retrieve. Must
+	 *             not be {@code null}.
 	 *
 	 * @return The value of the non-standard attribute (may also be 
-	 *         {@code null}. {@code null} if not found.
+	 *         {@code null}, {@code null} if not found.
 	 */
 	public Object getNonStdAttribute(final String name) {
 	
@@ -214,20 +219,35 @@ public abstract class JSONRPC2Message {
 	
 	
 	/** 
-	 * Gets a JSON object representing this message.
+	 * Returns a JSON object representing this JSON-RPC 2.0 message.
 	 *
-	 * @return A JSON object.
+	 * <p>Use {@link #toJSONObject} instead.
+	 *
+	 * @return The JSON object.
 	 */
-	public abstract JSONObject toJSON();
+	@Deprecated
+	public JSONObject toJSON() {
+	
+		return toJSONObject();
+	}
 	
 	
 	/** 
-	 * Serialises this message to a JSON string.
+	 * Returns a JSON object representing this JSON-RPC 2.0 message.
 	 *
-	 * @return A JSON-RPC 2.0 encoded string.
+	 * @return The JSON object.
+	 */
+	public abstract JSONObject toJSONObject();
+	
+	
+	/** 
+	 * Serialises this JSON-RPC 2.0 message to a JSON object string.
+	 *
+	 * @return The JSON object string representing this JSON-RPC 2.0 
+	 *         message.
 	 */
 	public String toString() {
 		
-		return toJSON().toString();
+		return toJSONObject().toString();
 	}
 }

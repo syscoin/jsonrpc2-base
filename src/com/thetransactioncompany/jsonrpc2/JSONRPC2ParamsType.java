@@ -21,6 +21,7 @@ package com.thetransactioncompany.jsonrpc2;
  */
 public final class JSONRPC2ParamsType {
 
+
 	/** The integer value for this parameters type. */
 	private final int intValue;
 	
