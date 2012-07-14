@@ -157,3 +157,7 @@ version 1.25.1 (2012-04-03)
 version 1.26 (2012-07-08)
 	* Adds class cast exception checking to critical sections in the utility
 	  retriever classes.
+
+version 1.27 (2012-07-14)
+	* Updates build.xml script.
+	* Updates JUnit JAR to 4.10.
