@@ -112,7 +112,7 @@ import net.minidev.json.JSONObject;
  * <a href="http://groups.google.com/group/json-rpc">here</a>.
  *
  * @author Vladimir Dzhuvinov
- * @version 1.26 (2010-07-10)
+ * @version $version$ (2010-07-10)
  */
 public class JSONRPC2Response extends JSONRPC2Message {
 	

@@ -52,7 +52,7 @@ import net.minidev.json.JSONObject;
  * <a href="http://groups.google.com/group/json-rpc">here</a>.
  *
  * @author Vladimir Dzhuvinov
- * @version 1.26 (2011-08-05)
+ * @version $version$ (2011-08-05)
  */
 public class JSONRPC2Error extends Exception {
 	

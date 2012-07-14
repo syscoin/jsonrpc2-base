@@ -38,7 +38,7 @@
  * sister {@link com.thetransactioncompany.jsonrpc2} package.
  *
  * @author Vladimir Dzhuvinov
- * @version 1.26 (2011-10-16)
+ * @version $version$ ($version-date$)
  */
 package com.thetransactioncompany.jsonrpc2.util;
 

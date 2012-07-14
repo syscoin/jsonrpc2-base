@@ -23,7 +23,7 @@
  * website.
  *
  * @author Vladimir Dzhuvinov
- * @version 1.26 (2011-08-05)
+ * @version $version$ ($version-date$)
  */
 package com.thetransactioncompany.jsonrpc2;
 

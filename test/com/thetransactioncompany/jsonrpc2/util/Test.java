@@ -12,7 +12,7 @@ import com.thetransactioncompany.jsonrpc2.*;
  * JUnit tests for the parameter retriever classes.
  *
  * @author Vladimir Dzhuvinov
- * @version 1.26 (2011-10-08)
+ * @version $version$ (2011-10-08)
  */
 public class Test extends TestCase {
 

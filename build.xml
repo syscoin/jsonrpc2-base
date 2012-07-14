@@ -1,6 +1,7 @@
 <project name="JSON-RPC 2.0 Base" default="dist" basedir=".">
 
 	<property name="version" value="1.26"/>
+	<property name="version-date" value="2012-07-14"/>
 	<property name="jarfile" value="jsonrpc2-base-${version}.jar"/>
 	
 	<path id="classpath.compile">
@@ -17,17 +18,34 @@
 	</path>
 	
 	<target name="clean">
+		<delete dir="procsrc"/>
 		<delete dir="build"/>
 		<delete dir="javadoc"/>
 		<delete file="${jarfile}"/>
+		<delete file="JsonRpc2-Base.zip"/>
 		<delete>
 			<fileset dir="." includes="**/TEST-*"/>
 		</delete>
 	</target>
 	
-	<target name="compile">
+	<target name="src">
+		<mkdir dir="procsrc"/>
+		<copy todir="procsrc">
+    			<fileset dir="src"/>
+  		</copy>
+		
+		<!-- Indicate version number and version date -->
+		<replace dir="procsrc" token="$version$" value="${version}">
+			<include name="**/*.java"/>
+		</replace>
+		<replace dir="procsrc" token="$version-date$" value="${version-date}">
+			<include name="**/*.java"/>
+		</replace>
+	</target>
+	
+	<target name="compile" depends="src">
 		<mkdir dir="build"/>
-		<javac srcdir="src" 
+		<javac srcdir="procsrc" 
 		       destdir="build" 
 		       classpathref="classpath.compile"
 		       includeantruntime="false">
@@ -36,7 +54,7 @@
 		</javac>
 	</target>
 	
-	<target name="compile-tests">
+	<target name="compile-tests" depends="compile">
 		<mkdir dir="build"/>
 		<javac srcdir="test" 
 		       destdir="build" 
@@ -54,10 +72,10 @@
 		</junit>
 	</target>
 	
-	<target name="javadoc">
+	<target name="javadoc" depends="src">
 		<mkdir dir="javadoc"/>
 		<javadoc packagenames="com.thetransactioncompany.jsonrpc2.*, com.thetransactioncompany.jsonrpc2.util.*"
-	        	 sourcepath="src"
+	        	 sourcepath="procsrc"
 			 classpathref="classpath.compile"
 			 destdir="javadoc"
 			 author="true"
@@ -77,13 +95,17 @@
 	
 	<target name="jar-min" depends="compile">
 		<jar destfile="${jarfile}" basedir="build" excludes="**/Test.class"/>
-	</target>  
+	</target>
 	
 	<target name="dist" depends="clean,compile,compile-tests,junit,javadoc,jar">
 		<delete dir="build"/>
+		<delete dir="procsrc"/>
 		<delete>
 			<fileset dir="." includes="**/TEST-*"/>
 		</delete>
+		<zip destfile="JsonRpc2-Base.zip">
+			<zipfileset dir="." prefix="JsonRpc2-Base-${version}"/>
+		</zip>
 	</target>
 
 </project>

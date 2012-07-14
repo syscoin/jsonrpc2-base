@@ -52,7 +52,7 @@ import net.minidev.json.parser.*;
  * <a href="http://groups.google.com/group/json-rpc">here</a>.
  * 
  * @author Vladimir Dzhuvinov
- * @version 1.26 (2011-08-06)
+ * @version $version$ (2011-08-06)
  */
 public class JSONRPC2Parser {
 

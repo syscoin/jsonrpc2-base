@@ -9,7 +9,7 @@ package com.thetransactioncompany.jsonrpc2;
  * <a href="http://groups.google.com/group/json-rpc">here</a>.
  *
  * @author Vladimir Dzhuvinov
- * @version 1.26 (2010-05-18)
+ * @version $version$ (2010-05-18)
  */
 public class JSONRPC2ParseException extends Exception {
 	

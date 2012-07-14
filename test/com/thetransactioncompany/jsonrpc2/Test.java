@@ -10,7 +10,7 @@ import junit.framework.*;
  * JUnit tests for the base JSON-RPC 2.0 classes.
  *
  * @author Vladimir Dzhuvinov
- * @version 1.26.1 (2011-08-05)
+ * @version $version$ (2011-08-05)
  */
 public class Test extends TestCase {
 

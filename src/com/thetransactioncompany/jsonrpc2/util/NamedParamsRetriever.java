@@ -70,7 +70,7 @@ import com.thetransactioncompany.jsonrpc2.*;
  * </pre>
  *
  * @author Vladimir Dzhuvinov
- * @version 1.26 (2012-07-08)
+ * @version $version$ (2012-07-08)
  */
 public class NamedParamsRetriever 
 	extends ParamsRetriever {

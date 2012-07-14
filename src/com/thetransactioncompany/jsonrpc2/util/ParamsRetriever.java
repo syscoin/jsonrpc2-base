@@ -10,7 +10,7 @@ import com.thetransactioncompany.jsonrpc2.*;
  * The base abstract class for the JSON-RPC 2.0 parameter retrievers.
  *
  * @author Vladimir Dzhuvinov
- * @version 1.26 (2011-10-08)
+ * @version $version$ (2011-10-08)
  */
 public abstract class ParamsRetriever {
 
