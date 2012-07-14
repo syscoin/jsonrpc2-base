@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.minidev.json.JSONAware;
 import net.minidev.json.JSONObject;
 
 
@@ -57,7 +58,7 @@ import net.minidev.json.JSONObject;
  * @author Vladimir Dzhuvinov
  * @version $version$ (2012-07-14)
  */
-public abstract class JSONRPC2Message {
+public abstract class JSONRPC2Message implements JSONAware {
 
 
 	/**
@@ -238,6 +239,20 @@ public abstract class JSONRPC2Message {
 	 * @return The JSON object.
 	 */
 	public abstract JSONObject toJSONObject();
+	
+	
+	/**
+	 * Returns a JSON string representation of this JSON-RPC 2.0 message.
+	 *
+	 * @see #toString
+	 *
+	 * @return The JSON object string representing this JSON-RPC 2.0 
+	 *         message.
+	 */
+	public String toJSONString() {
+	
+		return toString();
+	}
 	
 	
 	/** 
