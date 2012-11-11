@@ -389,7 +389,7 @@ public class JSONRPC2Request extends JSONRPC2Message {
 		
 		req.put("jsonrpc", "2.0");
 		
-		Map <String,Object> nonStdAttributes = getNonStandardAttributes();
+		Map <String,Object> nonStdAttributes = getNonStdAttributes();
 		
 		if (nonStdAttributes != null) {
 		

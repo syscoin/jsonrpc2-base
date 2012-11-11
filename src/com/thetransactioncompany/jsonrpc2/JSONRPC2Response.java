@@ -401,7 +401,7 @@ public class JSONRPC2Response extends JSONRPC2Message {
 		
 		// Result and error are mutually exclusive
 		if (error != null) {
-			out.put("error", error.toJSON());
+			out.put("error", error.toJSONObject());
 		}
 		else {
 			out.put("result", result);
@@ -412,7 +412,7 @@ public class JSONRPC2Response extends JSONRPC2Message {
 		out.put("jsonrpc", "2.0");
 		
 		
-		Map <String,Object> nonStdAttributes = getNonStandardAttributes();
+		Map <String,Object> nonStdAttributes = getNonStdAttributes();
 		
 		if (nonStdAttributes != null) {
 		

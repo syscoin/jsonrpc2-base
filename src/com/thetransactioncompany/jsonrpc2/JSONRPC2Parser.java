@@ -620,8 +620,9 @@ public class JSONRPC2Parser {
 	
 	
 	/**
-	 * @deprecated See {@link #ignoreVersion(boolean)}.
+	 * @see #ignoreVersion
 	 */
+	@Deprecated
 	public void noStrict(final boolean noStrict) {
 	
 		ignoreVersion(noStrict);
@@ -629,8 +630,9 @@ public class JSONRPC2Parser {
 	
 	
 	/**
-	 * @deprecated See {@link #ignoresVersion}.
+	 * @see #ignoresVersion
 	 */
+	@Deprecated
 	public boolean isNoStrict() {
 	
 		return ignoresVersion();

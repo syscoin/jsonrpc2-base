@@ -338,7 +338,7 @@ public class JSONRPC2Notification extends JSONRPC2Message {
 		notf.put("jsonrpc", "2.0");
 		
 		
-		Map <String,Object> nonStdAttributes = getNonStandardAttributes();
+		Map <String,Object> nonStdAttributes = getNonStdAttributes();
 		
 		if (nonStdAttributes != null) {
 		
