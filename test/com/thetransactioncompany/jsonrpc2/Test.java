@@ -3,7 +3,7 @@ package com.thetransactioncompany.jsonrpc2;
 
 import java.util.*;
 
-import junit.framework.*;
+import junit.framework.TestCase;
 
 
 /**

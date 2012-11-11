@@ -3,7 +3,7 @@ package com.thetransactioncompany.jsonrpc2.util;
 
 import java.util.*;
 
-import junit.framework.*;
+import junit.framework.TestCase;
 
 import com.thetransactioncompany.jsonrpc2.*;
 
@@ -79,7 +79,7 @@ public class Test extends TestCase {
 		// No exception must be thrown here
 		try {
 			for (int i=0; i < size; i++)
-				pp.ensureParameter(i);
+				pp.ensureParam(i);
 		
 		} catch (JSONRPC2Error e) {
 			fail("Missing positional parameter: " + e.getMessage());
@@ -87,7 +87,7 @@ public class Test extends TestCase {
 		
 		// Force exception
 		try {
-			pp.ensureParameter(nonExistingPosition);
+			pp.ensureParam(nonExistingPosition);
 			fail("Failed to raise exception on non-existing position");
 		} catch (JSONRPC2Error e) {
 			// ok
@@ -95,14 +95,14 @@ public class Test extends TestCase {
 		
 		
 		// Check parameter test
-		assertTrue(pp.hasParameter(0));
-		assertTrue(pp.hasParameter(1));
-		assertTrue(pp.hasParameter(2));
-		assertTrue(pp.hasParameter(3));
-		assertTrue(pp.hasParameter(4));
-		assertTrue(pp.hasParameter(5));
-		assertTrue(pp.hasParameter(6));
-		assertFalse(pp.hasParameter(nonExistingPosition));
+		assertTrue(pp.hasParam(0));
+		assertTrue(pp.hasParam(1));
+		assertTrue(pp.hasParam(2));
+		assertTrue(pp.hasParam(3));
+		assertTrue(pp.hasParam(4));
+		assertTrue(pp.hasParam(5));
+		assertTrue(pp.hasParam(6));
+		assertFalse(pp.hasParam(nonExistingPosition));
 	
 		// Compare parameters
 		try {
@@ -205,7 +205,7 @@ public class Test extends TestCase {
 		// No exception must be thrown here
 		try {
 			for (int i=0; i < size; i++)
-				np.ensureParameter("param" + i);
+				np.ensureParam("param" + i);
 			
 		} catch (JSONRPC2Error e) {
 			fail(e.getMessage());
@@ -213,21 +213,21 @@ public class Test extends TestCase {
 
 		// Force exception
 		try {
-			np.ensureParameter(badParamName);
+			np.ensureParam(badParamName);
 			
 		} catch (JSONRPC2Error e) {
 			assertTrue(true);
 		}
 		
 		// Check parameter test
-		assertTrue(np.hasParameter("param0"));
-		assertTrue(np.hasParameter("param1"));
-		assertTrue(np.hasParameter("param2"));
-		assertTrue(np.hasParameter("param3"));
-		assertTrue(np.hasParameter("param4"));
-		assertTrue(np.hasParameter("param5"));
-		assertTrue(np.hasParameter("param6"));
-		assertFalse(np.hasParameter(badParamName));
+		assertTrue(np.hasParam("param0"));
+		assertTrue(np.hasParam("param1"));
+		assertTrue(np.hasParam("param2"));
+		assertTrue(np.hasParam("param3"));
+		assertTrue(np.hasParam("param4"));
+		assertTrue(np.hasParam("param5"));
+		assertTrue(np.hasParam("param6"));
+		assertFalse(np.hasParam(badParamName));
 		
 		
 		// Compare parameters
@@ -282,16 +282,16 @@ public class Test extends TestCase {
 		
 		// Test check names method
 		try {
-			np.ensureParameters(names);
+			np.ensureParams(names);
 			
 		} catch (JSONRPC2Error e) {
-			fail("Unexpected ensureParameters() exception: " + e.getMessage());
+			fail("Unexpected ensureParams() exception: " + e.getMessage());
 		}
 		
 		try {
 			// modify the last name
 			names[size-1] = "bad name";
-			np.ensureParameters(names);
+			np.ensureParams(names);
 			
 		} catch (JSONRPC2Error e) {
 			assertTrue(true);
@@ -304,7 +304,7 @@ public class Test extends TestCase {
 			for (int i=0; i< size-1; i++)
 				names[i] = "param" + i;
 			
-			np.ensureParameters(names);
+			np.ensureParams(names);
 			
 		} catch (JSONRPC2Error e) {
 			assertTrue(true);
@@ -506,15 +506,15 @@ public class Test extends TestCase {
 		PositionalParamsRetriever r = new PositionalParamsRetriever(l);
 		
 		try {
-			r.ensureParameter(0);
-			r.ensureParameter(1);
-			r.ensureParameter(2);
+			r.ensureParam(0);
+			r.ensureParam(1);
+			r.ensureParam(2);
 		} catch (JSONRPC2Error e) {
 			fail(e.getMessage());
 		}
 		
 		try {
-			r.ensureParameter(3);
+			r.ensureParam(3);
 			fail("Failed to raise exception");
 		} catch (JSONRPC2Error e) {
 			// ok
@@ -532,15 +532,15 @@ public class Test extends TestCase {
 		NamedParamsRetriever r = new NamedParamsRetriever(m);
 		
 		try {
-			r.ensureParameter("one");
-			r.ensureParameter("two");
-			r.ensureParameter("three");
+			r.ensureParam("one");
+			r.ensureParam("two");
+			r.ensureParam("three");
 		} catch (JSONRPC2Error e) {
 			fail(e.getMessage());
 		}
 		
 		try {
-			r.ensureParameter("four");
+			r.ensureParam("four");
 			fail("Failed to raise exception");
 		} catch (JSONRPC2Error e) {
 			// ok
@@ -558,14 +558,14 @@ public class Test extends TestCase {
 		PositionalParamsRetriever r = new PositionalParamsRetriever(l);
 		
 		try {
-			r.ensureParameter(0, String.class);
-			r.ensureParameter(1, Integer.class);
+			r.ensureParam(0, String.class);
+			r.ensureParam(1, Integer.class);
 		} catch (JSONRPC2Error e) {
 			fail(e.getMessage());
 		}
 		
 		try {
-			r.ensureParameter(2, Double.class);
+			r.ensureParam(2, Double.class);
 			fail("Failed to raise exception");
 		} catch (JSONRPC2Error e) {
 			// ok
@@ -583,14 +583,14 @@ public class Test extends TestCase {
 		NamedParamsRetriever r = new NamedParamsRetriever(m);
 		
 		try {
-			r.ensureParameter("one", String.class);
-			r.ensureParameter("two", Integer.class);
+			r.ensureParam("one", String.class);
+			r.ensureParam("two", Integer.class);
 		} catch (JSONRPC2Error e) {
 			fail(e.getMessage());
 		}
 		
 		try {
-			r.ensureParameter("three", Double.class);
+			r.ensureParam("three", Double.class);
 			fail("Failed to raise exception");
 		} catch (JSONRPC2Error e) {
 			// ok
@@ -607,7 +607,7 @@ public class Test extends TestCase {
 		
 		boolean allowNull = true;
 		
-		assertTrue(r.hasParameter(0));
+		assertTrue(r.hasParam(0));
 		
 		try {
 			r.get(0, String.class, allowNull);
@@ -694,7 +694,7 @@ public class Test extends TestCase {
 		
 		boolean allowNull = true;
 		
-		assertTrue(r.hasParameter("one"));
+		assertTrue(r.hasParam("one"));
 		
 		try {
 			r.get("one", String.class, allowNull);
