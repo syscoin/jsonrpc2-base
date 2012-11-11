@@ -2,6 +2,7 @@ import com.thetransactioncompany.jsonrpc2.*;
 
 import java.util.*;
 
+
 /** 
  * This example illustrates a typical life-cycle of a JSON-RPC 2.0 request:
  * <ul>
