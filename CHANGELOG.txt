@@ -170,4 +170,5 @@ version 1.28 (2012-11-11)
 	* Adds getParams() method to {Positional|Named}ParamsRetriever.
 	* Renames methods for consistent use of "std" and "params" abbreviation,
 	  old ones deprecated.
+	* Adds static JSONRPC2Error appendMessage and setData methods.
 	* Adds standard annotations.
