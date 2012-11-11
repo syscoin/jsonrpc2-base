@@ -17,7 +17,7 @@ package com.thetransactioncompany.jsonrpc2;
  * <a href="http://groups.google.com/group/json-rpc">here</a>.
  * 
  * @author Vladimir Dzhuvinov
- * @version $version$ (2010-08-07)
+ * @version $version$ (2012-11-11)
  */
 public final class JSONRPC2ParamsType {
 
@@ -138,6 +138,7 @@ public final class JSONRPC2ParamsType {
 	 * @return {@code true} if the objects are equal, or {@code false} if 
 	 *         not.
 	 */
+	@Override
 	public boolean equals(final Object o) {
 	
 		if (o == null)
@@ -159,9 +160,9 @@ public final class JSONRPC2ParamsType {
 	 *
 	 * @return A string representing this parameters type.
 	 */
+	@Override
 	public String toString() {
 	
 		return name;
 	}
-	
 }

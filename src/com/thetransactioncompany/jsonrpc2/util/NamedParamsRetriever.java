@@ -113,6 +113,7 @@ public class NamedParamsRetriever
 	 *
 	 * @return The number of named parameters.
 	 */
+	@Override
 	public int size() {
 	
 		return params.size();

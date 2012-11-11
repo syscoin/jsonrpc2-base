@@ -259,6 +259,7 @@ public abstract class JSONRPC2Message implements JSONAware {
 	 * @return The JSON object string representing this JSON-RPC 2.0 
 	 *         message.
 	 */
+	@Override
 	public String toJSONString() {
 	
 		return toString();
@@ -271,6 +272,7 @@ public abstract class JSONRPC2Message implements JSONAware {
 	 * @return The JSON object string representing this JSON-RPC 2.0 
 	 *         message.
 	 */
+	@Override
 	public String toString() {
 		
 		return toJSONObject().toString();
