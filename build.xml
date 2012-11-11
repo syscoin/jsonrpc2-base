@@ -49,8 +49,7 @@
 		       destdir="build" 
 		       classpathref="classpath.compile"
 		       includeantruntime="false">
-	
-			<compilerarg value="-Xlint:unchecked"/>
+			<compilerarg value="-Xlint"/>
 		</javac>
 	</target>
 	
@@ -59,7 +58,9 @@
 		<javac srcdir="test" 
 		       destdir="build" 
 		       classpathref="classpath.compile"
-		       includeantruntime="false"/>
+		       includeantruntime="false">
+			<compilerarg value="-Xlint"/>
+		</javac>
 	</target>
 	
 	<target name="junit" depends="compile,compile-tests">
