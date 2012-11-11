@@ -518,7 +518,7 @@ public class PositionalParamsRetriever
 	public String getEnumString(final int position, final String[] enumStrings, final boolean ignoreCase)
 		throws JSONRPC2Error {
 		
-		String value = (String)get(position, String.class);
+		String value = get(position, String.class);
 		
 		return ensureEnumString(value, enumStrings, ignoreCase);
 	}
@@ -564,7 +564,7 @@ public class PositionalParamsRetriever
 	public String getOptEnumString(final int position, final String[] enumStrings, final String defaultValue, final boolean ignoreCase)
 		throws JSONRPC2Error {
 		
-		String value = (String)getOpt(position, String.class, defaultValue);
+		String value = getOpt(position, String.class, defaultValue);
 		
 		return ensureEnumString(value, enumStrings, ignoreCase);
 	}
@@ -611,7 +611,7 @@ public class PositionalParamsRetriever
 	public <T extends Enum<T>> T getEnum(final int position, final Class<T> enumClass, final boolean ignoreCase)
 		throws JSONRPC2Error {
 		
-		String value = (String)get(position, String.class);
+		String value = get(position, String.class);
 		
 		return ensureEnumString(value, enumClass, ignoreCase);
 	}
@@ -662,7 +662,7 @@ public class PositionalParamsRetriever
 	public <T extends Enum<T>> T getOptEnum(final int position, final Class<T> enumClass, final String defaultValue, final boolean ignoreCase)
 		throws JSONRPC2Error {
 		
-		String value = (String)getOpt(position, String.class, defaultValue);
+		String value = getOpt(position, String.class, defaultValue);
 		
 		return ensureEnumString(value, enumClass, ignoreCase);
 	}
@@ -1000,7 +1000,7 @@ public class PositionalParamsRetriever
 			return null;
 		
 		try {
-			return (String[])list.toArray(new String[0]);
+			return list.toArray(new String[0]);
 			
 		} catch (ArrayStoreException e) {
 			

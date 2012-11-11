@@ -236,7 +236,7 @@ public class NamedParamsRetriever
 	
 		Set<String> keyset = params.keySet();
 		
-		return (String[]) keyset.toArray(new String[]{});
+		return keyset.toArray(new String[]{});
 	}
 	
 	
@@ -679,7 +679,7 @@ public class NamedParamsRetriever
 	public String getEnumString(final String name, final String[] enumStrings, final boolean ignoreCase)
 		throws JSONRPC2Error {
 		
-		String value = (String)get(name, String.class);
+		String value = get(name, String.class);
 		
 		return ensureEnumString(value, enumStrings, ignoreCase);
 	}
@@ -724,7 +724,7 @@ public class NamedParamsRetriever
 	public String getOptEnumString(final String name, final String[] enumStrings, final String defaultValue, final boolean ignoreCase)
 		throws JSONRPC2Error {
 		
-		String value = (String)getOpt(name, String.class, defaultValue);
+		String value = getOpt(name, String.class, defaultValue);
 		
 		return ensureEnumString(value, enumStrings, ignoreCase);
 	}
@@ -771,7 +771,7 @@ public class NamedParamsRetriever
 	public <T extends Enum<T>> T getEnum(final String name, final Class<T> enumClass, final boolean ignoreCase)
 		throws JSONRPC2Error {
 		
-		String value = (String)get(name, String.class);
+		String value = get(name, String.class);
 		
 		return ensureEnumString(value, enumClass, ignoreCase);
 	}
@@ -821,7 +821,7 @@ public class NamedParamsRetriever
 	public <T extends Enum<T>> T getOptEnum(final String name, final Class<T> enumClass, final T defaultValue, final boolean ignoreCase)
 		throws JSONRPC2Error {
 		
-		String value = (String)getOpt(name, String.class, defaultValue.toString());
+		String value = getOpt(name, String.class, defaultValue.toString());
 		
 		return ensureEnumString(value, enumClass, ignoreCase);
 	}
@@ -881,7 +881,7 @@ public class NamedParamsRetriever
 	public int getInt(final String name)
 		throws JSONRPC2Error {
 		
-		Number number = (Number)get(name, Number.class);
+		Number number = get(name, Number.class);
 		return number.intValue();
 	}
 	
@@ -903,7 +903,7 @@ public class NamedParamsRetriever
 	public int getOptInt(final String name, final int defaultValue)
 		throws JSONRPC2Error {
 	
-		Number number = (Number)getOpt(name, Number.class, defaultValue);
+		Number number = getOpt(name, Number.class, defaultValue);
 		return number.intValue();
 	}
 	
@@ -922,7 +922,7 @@ public class NamedParamsRetriever
 	public long getLong(final String name)
 		throws JSONRPC2Error {
 	
-		Number number = (Number)get(name, Number.class);
+		Number number = get(name, Number.class);
 		return number.longValue();
 	}
 	
@@ -944,7 +944,7 @@ public class NamedParamsRetriever
 	public long getOptLong(final String name, final long defaultValue)
 		throws JSONRPC2Error {
 	
-		Number number = (Number)getOpt(name, Number.class, defaultValue);
+		Number number = getOpt(name, Number.class, defaultValue);
 		return number.longValue();
 	}
 	
@@ -963,7 +963,7 @@ public class NamedParamsRetriever
 	public float getFloat(final String name)
 		throws JSONRPC2Error {
 	
-		Number number = (Number)get(name, Number.class);
+		Number number = get(name, Number.class);
 		return number.floatValue();
 	}
 	
@@ -985,7 +985,7 @@ public class NamedParamsRetriever
 	public float getOptFloat(final String name, final float defaultValue)
 		throws JSONRPC2Error {
 	
-		Number number = (Number)getOpt(name, Number.class, defaultValue);
+		Number number = getOpt(name, Number.class, defaultValue);
 		return number.floatValue();
 	}
 	
@@ -1004,7 +1004,7 @@ public class NamedParamsRetriever
 	public double getDouble(final String name)
 		throws JSONRPC2Error {
 	
-		Number number = (Number)get(name, Number.class);
+		Number number = get(name, Number.class);
 		return number.doubleValue();
 	}
 	
@@ -1026,7 +1026,7 @@ public class NamedParamsRetriever
 	public double getOptDouble(final String name, final double defaultValue)
 		throws JSONRPC2Error {
 	
-		Number number = (Number)getOpt(name, Number.class, defaultValue);
+		Number number = getOpt(name, Number.class, defaultValue);
 		return number.doubleValue();
 	}
 	
@@ -1159,7 +1159,7 @@ public class NamedParamsRetriever
 			return null;
 		
 		try {
-			return (String[])list.toArray(new String[0]);
+			return list.toArray(new String[0]);
 			
 		} catch (ArrayStoreException e) {
 			
