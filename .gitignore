@@ -1,0 +1,5 @@
+/procsrc/
+/build/
+/javadoc/
+TEST*
+jsonrpc2-base-*.jar

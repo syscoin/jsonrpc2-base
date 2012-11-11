@@ -12,15 +12,9 @@ import com.thetransactioncompany.jsonrpc2.*;
  * JUnit tests for the parameter retriever classes.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2011-10-08)
+ * @version $version$ (2012-11-11)
  */
 public class Test extends TestCase {
-
-	
-	public Test(String name) {
-	
-		super(name);
-	}
 
 	
 	public void testPositionalParams() {
@@ -76,6 +70,8 @@ public class Test extends TestCase {
 		// Create new positional params instance
 		params = (List)request.getParams();
 		PositionalParamsRetriever pp = new PositionalParamsRetriever(params);
+
+		assertTrue(pp.getParams() instanceof List);
 		
 		// Check params size
 		assertEquals(size, params.size());
@@ -200,6 +196,8 @@ public class Test extends TestCase {
 		// Create new named params instance
 		params = (Map)request.getParams();
 		NamedParamsRetriever np = new NamedParamsRetriever(params);
+
+		assertTrue(np.getParams() instanceof Map);
 		
 		// Check params size
 		assertEquals(size, np.size());

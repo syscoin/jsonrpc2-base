@@ -10,15 +10,9 @@ import junit.framework.*;
  * JUnit tests for the base JSON-RPC 2.0 classes.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2011-08-05)
+ * @version $version$ (2012-11-11)
  */
 public class Test extends TestCase {
-
-	
-	public Test(String name) {
-	
-		super(name);
-	}
 
 
 	public void testNoParamsRequest() {

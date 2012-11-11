@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.thetransactioncompany.jsonrpc2.*;
+import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
 
 
 /**
@@ -68,7 +68,7 @@ import com.thetransactioncompany.jsonrpc2.*;
  * </pre>
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-07-08)
+ * @version $version$ (2012-11-11)
  */
 public class PositionalParamsRetriever
 	extends ParamsRetriever {
@@ -84,11 +84,26 @@ public class PositionalParamsRetriever
 	 * Creates a new positional parameters retriever from the specified 
 	 * value list.
 	 *
-	 * @param params The positional parameters list.
+	 * @param params The positional parameters list. Must not be 
+	 *               {@code null}.
 	 */
 	public PositionalParamsRetriever(final List<Object> params) {
 	
+		if (params == null)
+			throw new IllegalArgumentException("The parameters list must not be null");
+
 		this.params = params;
+	}
+
+
+	/**
+	 * Gets the positional parameters for this retriever.
+	 *
+	 * @return The positional parameters.
+	 */
+	public List<Object> getParams() {
+
+		return params;
 	}
 	
 	

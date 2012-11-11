@@ -14,18 +14,12 @@ import junit.framework.*;
  * messages.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2011-08-04)
+ * @version $version$ (2012-11-11)
  */
 public class TestNonStdAttributes extends TestCase {
 
 	
 	private final JSONParser parser = new JSONParser(JSONParser.MODE_JSON_SIMPLE);
-	
-	
-	public TestNonStdAttributes(String name) {
-	
-		super(name);
-	}
 
 	
 	public void testAppendRequest() {

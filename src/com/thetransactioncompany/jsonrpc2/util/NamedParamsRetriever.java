@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.thetransactioncompany.jsonrpc2.*;
+import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
 
 
 /**
@@ -70,7 +70,7 @@ import com.thetransactioncompany.jsonrpc2.*;
  * </pre>
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-07-08)
+ * @version $version$ (2012-11-11)
  */
 public class NamedParamsRetriever 
 	extends ParamsRetriever {
@@ -86,11 +86,25 @@ public class NamedParamsRetriever
 	 * Creates a new named parameters retriever from the specified 
 	 * key-value map.
 	 *
-	 * @param params The named parameters map.
+	 * @param params The named parameters map. Must not be {@code null}.
 	 */
 	public NamedParamsRetriever(final Map<String,Object> params) {
 	
+		if (params == null)
+			throw new IllegalArgumentException("The parameters map must not be null");
+
 		this.params = params;
+	}
+
+
+	/**
+	 * Gets the named parameters for this retriever.
+	 *
+	 * @return The named parameters.
+	 */
+	public Map<String,Object> getParams() {
+
+		return params;
 	}
 	
 	

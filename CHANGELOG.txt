@@ -165,3 +165,6 @@ version 1.27 (2012-07-14)
 	* Updates build.xml script for automatic version number substitution and
 	  ZIP file generation.
 	* Updates JUnit JAR to 4.10.
+
+version 1.28 (2012-11-11)
+	* Adds getParams() method to {Positional|Named}ParamsRetriever.
