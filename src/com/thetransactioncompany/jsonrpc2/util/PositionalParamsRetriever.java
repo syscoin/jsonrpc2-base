@@ -127,12 +127,22 @@ public class PositionalParamsRetriever
 	 *
 	 * @return {@code true} if the parameter exists, else {@code false}.
 	 */
-	public boolean hasParameter(final int position) {
+	public boolean hasParam(final int position) {
 	
 		if (position >= params.size())
 			return false;
 		else
 			return true;
+	}
+
+
+	/**
+	 * @see #hasParam
+	 */
+	@Deprecated
+	public boolean hasParameter(final int position) {
+
+		return hasParam(position);
 	}
 	
 	
@@ -149,11 +159,22 @@ public class PositionalParamsRetriever
 	 * @throws JSONRPC2Error On a missing parameter
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public void ensureParameter(final int position)
+	public void ensureParam(final int position)
 		throws JSONRPC2Error {
 		
 		if (position >= params.size() )
 			throw JSONRPC2Error.INVALID_PARAMS;
+	}
+
+
+	/**
+	 * @see #ensureParam
+	 */
+	@Deprecated
+	public void ensureParameter(final int position)
+		throws JSONRPC2Error {
+
+		ensureParam(position);
 	}
 	
 	
@@ -174,10 +195,21 @@ public class PositionalParamsRetriever
 	 * @throws JSONRPC2Error On a missing parameter, {@code null} value or 
 	 *                       bad type ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public <T> void ensureParameter(final int position, final Class<T> clazz)
+	public <T> void ensureParam(final int position, final Class<T> clazz)
 		throws JSONRPC2Error {
 		
 		ensureParameter(position, clazz, false);
+	}
+
+
+	/**
+	 * @see #ensureParam(int, Class)
+	 */
+	@Deprecated
+	public <T> void ensureParameter(final int position, final Class<T> clazz)
+		throws JSONRPC2Error {
+
+		ensureParam(position, clazz);
 	}
 	
 	
@@ -200,7 +232,7 @@ public class PositionalParamsRetriever
 	 * @throws JSONRPC2Error On a missing parameter or bad type 
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public <T> void ensureParameter(final int position, final Class<T> clazz, final boolean allowNull)
+	public <T> void ensureParam(final int position, final Class<T> clazz, final boolean allowNull)
 		throws JSONRPC2Error {
 		
 		// First, check existence only
@@ -219,6 +251,17 @@ public class PositionalParamsRetriever
 		
 		if (! clazz.isAssignableFrom(value.getClass()))
 			throw JSONRPC2Error.INVALID_PARAMS;
+	}
+
+
+	/**
+	 * @see #ensureParam(int, Class, boolean)
+	 */
+	@Deprecated
+	public <T> void ensureParameter(final int position, final Class<T> clazz, final boolean allowNull)
+		throws JSONRPC2Error {
+
+		ensureParam(position, clazz, allowNull);
 	}
 	
 	

@@ -168,6 +168,6 @@ version 1.27 (2012-07-14)
 
 version 1.28 (2012-11-11)
 	* Adds getParams() method to {Positional|Named}ParamsRetriever.
-	* Deprecates JSONRPC2Message.getNonStandardAttributes(), replaces with 
-	  getNonStdAttributes()
+	* Renames methods for consistent use of "std" and "params" abbreviation,
+	  old ones deprecated.
 	* Adds standard annotations.

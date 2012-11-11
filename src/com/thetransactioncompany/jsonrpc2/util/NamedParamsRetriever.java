@@ -128,12 +128,22 @@ public class NamedParamsRetriever
 	 *
 	 * @return {@code true} if the parameter exists, else {@code false}.
 	 */
-	public boolean hasParameter(final String name) {
+	public boolean hasParam(final String name) {
 		
 		if (params.containsKey(name))
 			return true;
 		else
 			return false;
+	}
+
+
+	/**
+	 * @see #hasParam
+	 */
+	@Deprecated
+	public boolean hasParameter(final String name) {
+
+		return hasParam(name);
 	}
 	
 	
@@ -145,9 +155,19 @@ public class NamedParamsRetriever
 	 *
 	 * @return {@code true} if the parameters exist, else {@code false}.
 	 */
-	public boolean hasParameters(final String[] names) {
+	public boolean hasParams(final String[] names) {
 	
 		return hasParameters(names, null);
+	}
+
+
+	/**
+	 * @see #hasParams(String[])
+	 */
+	@Deprecated
+	public boolean hasParameters(final String[] names) {
+
+		return hasParams(names);
 	}
 	
 	
@@ -163,7 +183,7 @@ public class NamedParamsRetriever
 	 * @return {@code true} if the specified mandatory names and only any of
 	 *         the optional are present, else {@code false}.
 	 */
-	public boolean hasParameters(final String[] mandatoryNames, final String[] optionalNames) {
+	public boolean hasParams(final String[] mandatoryNames, final String[] optionalNames) {
 	
 		// Do shallow copy of params
 		Map paramsCopy = (Map)((HashMap)params).clone();
@@ -195,6 +215,16 @@ public class NamedParamsRetriever
 		else
 			return false;
 	}
+
+
+	/**
+	 * @see #hasParams(String[], String[])
+	 */
+	@Deprecated
+	public boolean hasParameters(final String[] mandatoryNames, final String[] optionalNames) {
+
+		return hasParams(mandatoryNames, optionalNames);
+	}
 	
 	
 	/**
@@ -224,10 +254,21 @@ public class NamedParamsRetriever
 	 *                       the specified 
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public void ensureParameters(String[] mandatoryNames)
+	public void ensureParams(String[] mandatoryNames)
 		throws JSONRPC2Error {
 	
 		ensureParameters(mandatoryNames, null);
+	}
+
+
+	/**
+	 * @see #ensureParams(String[])
+	 */
+	@Deprecated
+	public void ensureParameters(String[] mandatoryNames)
+		throws JSONRPC2Error {
+
+		ensureParams(mandatoryNames);
 	}
 	
 	
@@ -247,11 +288,22 @@ public class NamedParamsRetriever
 	 *                       outside the specified mandatory and optional
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public void ensureParameters(String[] mandatoryNames, String[] optionalNames)
+	public void ensureParams(String[] mandatoryNames, String[] optionalNames)
 		throws JSONRPC2Error {
 	
 		if (! hasParameters(mandatoryNames, optionalNames))
 			throw JSONRPC2Error.INVALID_PARAMS;
+	}
+
+
+	/**
+	 * @see #ensureParams(String[], String[])
+	 */
+	@Deprecated
+	public void ensureParameters(String[] mandatoryNames, String[] optionalNames)
+		throws JSONRPC2Error {
+
+		ensureParams(mandatoryNames, optionalNames);
 	}
 	
 	
@@ -267,11 +319,22 @@ public class NamedParamsRetriever
 	 * @throws JSONRPC2Error On a missing parameter
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public void ensureParameter(final String name)
+	public void ensureParam(final String name)
 		throws JSONRPC2Error {
 		
 		if (! hasParameter(name))
 			throw JSONRPC2Error.INVALID_PARAMS;
+	}
+
+
+	/**
+	 * @see #ensureParam(String)
+	 */
+	@Deprecated
+	public void ensureParameter(final String name)
+		throws JSONRPC2Error {
+
+		ensureParam(name);
 	}
 	
 	
@@ -292,10 +355,21 @@ public class NamedParamsRetriever
 	 * @throws JSONRPC2Error On a missing parameter, {@code null} value or 
 	 *                       bad type ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public <T> void ensureParameter(final String name, final Class<T> clazz)
+	public <T> void ensureParam(final String name, final Class<T> clazz)
 		throws JSONRPC2Error {
 		
 		ensureParameter(name, clazz, false);
+	}
+
+
+	/**
+	 * @see #ensureParam(String, Class)
+	 */
+	@Deprecated
+	public <T> void ensureParameter(final String name, final Class<T> clazz)
+		throws JSONRPC2Error {
+
+		ensureParam(name, clazz);
 	}
 	
 	
@@ -318,7 +392,7 @@ public class NamedParamsRetriever
 	 * @throws JSONRPC2Error On a missing parameter or bad type 
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public <T> void ensureParameter(final String name, final Class<T> clazz, final boolean allowNull)
+	public <T> void ensureParam(final String name, final Class<T> clazz, final boolean allowNull)
 		throws JSONRPC2Error {
 		
 		// First, check existence only
@@ -338,6 +412,17 @@ public class NamedParamsRetriever
 		
 		if (! clazz.isAssignableFrom(value.getClass()))
 			throw JSONRPC2Error.INVALID_PARAMS;
+	}
+
+
+	/**
+	 * @see #ensureParam(String, Class, boolean)
+	 */
+	@Deprecated
+	public <T> void ensureParameter(final String name, final Class<T> clazz, final boolean allowNull)
+		throws JSONRPC2Error {
+
+		ensureParam(name, clazz, allowNull);
 	}
 	
 	
