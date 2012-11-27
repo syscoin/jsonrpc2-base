@@ -53,7 +53,7 @@ import net.minidev.json.JSONObject;
  * <a href="http://groups.google.com/group/json-rpc">here</a>.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-11-11)
+ * @version $version$ (2012-11-27)
  */
 public class JSONRPC2Error extends Exception {
 	
@@ -122,7 +122,7 @@ public class JSONRPC2Error extends Exception {
 	 * @param data Optional error data, must <a href="#map">map</a> to a 
 	 *             valid JSON type.
 	 *
-	 * @return A new JSON-RPC 2.0 error the set data.
+	 * @return A new JSON-RPC 2.0 error with the set data.
 	 */
 	public static JSONRPC2Error setData(final JSONRPC2Error err, final Object data) {
 
@@ -181,6 +181,20 @@ public class JSONRPC2Error extends Exception {
 	public Object getData() {
 		
 		return data;	
+	}
+
+
+	/**
+	 * Appends the specified string to the message of this JSON-RPC 2.0 
+	 * error.
+	 *
+	 * @param apx The string to append to the original error message.
+	 *
+	 * @return A new JSON-RPC 2.0 error with the appended message.
+	 */
+	public JSONRPC2Error appendMessage(final String apx) {
+
+		return new JSONRPC2Error(code, getMessage() + apx, data);
 	}
 	
 	
