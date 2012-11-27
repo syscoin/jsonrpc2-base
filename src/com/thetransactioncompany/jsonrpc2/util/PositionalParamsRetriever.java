@@ -17,9 +17,9 @@ import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
  *
  * <ul>
  *     <li>{@code getXXX(param_pos)} for mandatory parameters, where {@code XXX}
- *         is the expected parameter type.</li>
+ *         is the expected parameter type.
  *     <li>{@code getOptXXX(param_pos, default_value)} for optional parameters,
- *         specifying a default value.</li>
+ *         specifying a default value.
  * </ul>
  *
  * <p>There are also generic getter methods that let you do the type conversion 
