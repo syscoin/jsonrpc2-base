@@ -68,7 +68,7 @@ import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
  * </pre>
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-11-11)
+ * @version $version$ (2012-11-27)
  */
 public class PositionalParamsRetriever
 	extends ParamsRetriever {
@@ -78,6 +78,67 @@ public class PositionalParamsRetriever
 	 * The positional params interface. 
 	 */
 	private List<Object> params = null;
+
+
+	/**
+	 * Throws a JSON-RPC 2.0 error indicating a missing positional 
+	 * parameter.
+	 *
+	 * @param position The parameter position. Should be non-negative.
+	 *
+	 * @throws JSONRPC2Error Formatted JSON-RPC 2.0 error.
+	 */
+	private static void throwMissingParameterException(final int position)
+		throws JSONRPC2Error {
+
+		throw JSONRPC2Error.INVALID_PARAMS.
+			appendMessage(": Missing parameter at position " + position);
+	}
+
+
+	/**
+	 * Throws a JSON-RPC 2.0 error indicating a positional parameter with
+	 * unexpected {@code null} value.
+	 *
+	 * @param position The parameter position. Should be non-negative.
+	 *
+	 * @throws JSONRPC2Error Formatted JSON-RPC 2.0 error.
+	 */
+	private static void throwNullParameterException(final int position)
+		throws JSONRPC2Error {
+
+		throw JSONRPC2Error.INVALID_PARAMS.
+			appendMessage(": Parameter at position " + position + " must not be null");
+	}
+
+
+	/**
+	 * Creates a JSON-RPC 2.0 error indicating a positional parameter with 
+	 * an unexpected JSON type.
+	 *
+	 * @param position The parameter position. Should be non-negative.
+	 *
+	 * @return Formatted JSON-RPC 2.0 error.
+	 */
+	private static JSONRPC2Error newUnexpectedParameterTypeException(final int position) {
+
+		return JSONRPC2Error.INVALID_PARAMS.
+			appendMessage(": Parameter at position " + position + " has an unexpected JSON type");
+	}
+
+
+	/**
+	 * Creates a JSON-RPC 2.0 error indicating an array exception.
+	 *
+	 * @param position The parameter position. Should be non-negative.
+	 *
+	 * @return Formatted JSON-RPC 2.0 error.
+	 */
+	private static JSONRPC2Error newArrayException(final int position) {
+
+		return JSONRPC2Error.INVALID_PARAMS.
+			appendMessage(": Parameter at position " + position + " caused an array exception");
+	}
 	
 	
 	/**
@@ -163,7 +224,7 @@ public class PositionalParamsRetriever
 		throws JSONRPC2Error {
 		
 		if (position >= params.size() )
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throwMissingParameterException(position);
 	}
 
 
@@ -246,11 +307,11 @@ public class PositionalParamsRetriever
 			if (allowNull)
 				return; // ok
 			else
-				throw JSONRPC2Error.INVALID_PARAMS;
+				throwNullParameterException(position);
 		}
 		
 		if (! clazz.isAssignableFrom(value.getClass()))
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throw newUnexpectedParameterTypeException(position);
 	}
 
 
@@ -336,7 +397,7 @@ public class PositionalParamsRetriever
 			
 		} catch (ClassCastException e) {
 			
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throw newUnexpectedParameterTypeException(position);
 		}
 	}
 	
@@ -402,7 +463,7 @@ public class PositionalParamsRetriever
 			
 		} catch (ClassCastException e) {
 			
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throw newUnexpectedParameterTypeException(position);
 		}
 	}
 	
@@ -1004,7 +1065,7 @@ public class PositionalParamsRetriever
 			
 		} catch (ArrayStoreException e) {
 			
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throw newArrayException(position);
 		}
 	}
 	
@@ -1095,7 +1156,7 @@ public class PositionalParamsRetriever
 			
 		} catch (ClassCastException e) {
 			
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throw newUnexpectedParameterTypeException(position);
 		}
 	}
 	
@@ -1145,7 +1206,7 @@ public class PositionalParamsRetriever
 			
 		} catch (ClassCastException e) {
 			
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throw newUnexpectedParameterTypeException(position);
 		}
 	}
 }

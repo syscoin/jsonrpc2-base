@@ -70,7 +70,7 @@ import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
  * </pre>
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-11-11)
+ * @version $version$ (2012-11-27)
  */
 public class NamedParamsRetriever 
 	extends ParamsRetriever {
@@ -80,6 +80,77 @@ public class NamedParamsRetriever
 	 * The named params interface. 
 	 */
 	private Map<String,Object> params = null;
+
+
+	/**
+	 * Throws a JSON-RPC 2.0 error indicating one or more missing named
+	 * parameters.
+	 *
+	 * @param names The parameter names. Must not be {@code null}.
+	 *
+	 * @throws JSONRPC2Error Formatted JSON-RPC 2.0 error.
+	 */
+	private static void throwMissingParameterException(final String... names)
+		throws JSONRPC2Error {
+
+		StringBuilder list = new StringBuilder();
+
+		for (int i=0; i < names.length; i++) {
+
+			if (list.length() > 0)
+				list.append(',');
+
+			list.append(names[i]);
+		}
+
+		throw JSONRPC2Error.INVALID_PARAMS.
+			appendMessage(": Missing " + list.toString() + " parameter(s)");
+	}
+
+
+	/**
+	 * Throws a JSON-RPC 2.0 error indicating a named parameter with
+	 * unexpected {@code null} value.
+	 *
+	 * @param name The parameter name. Must not be {@code null}.
+	 *
+	 * @throws JSONRPC2Error Formatted JSON-RPC 2.0 error.
+	 */
+	private static void throwNullParameterException(final String name)
+		throws JSONRPC2Error {
+
+		throw JSONRPC2Error.INVALID_PARAMS.
+			appendMessage(": Parameter " + name + " must not be null");
+	}
+
+
+	/**
+	 * Creates a JSON-RPC 2.0 error indicating a named parameter with an
+	 * unexpected JSON type.
+	 *
+	 * @param name The parameter name. Must not be {@code null}.
+	 *
+	 * @return Formatted JSON-RPC 2.0 error.
+	 */
+	private static JSONRPC2Error newUnexpectedParameterTypeException(final String name) {
+
+		return JSONRPC2Error.INVALID_PARAMS.
+			appendMessage(": Parameter " + name + " has an unexpected JSON type");
+	}
+
+
+	/**
+	 * Creates a JSON-RPC 2.0 error indicating an array exception.
+	 *
+	 * @param name The parameter name. Must not be {@code null}.
+	 *
+	 * @return Formatted JSON-RPC 2.0 error.
+	 */
+	private static JSONRPC2Error newArrayException(final String name) {
+
+		return JSONRPC2Error.INVALID_PARAMS.
+			appendMessage(": Parameter " + name + " caused an array exception");
+	}
 
 
 	/** 
@@ -157,7 +228,7 @@ public class NamedParamsRetriever
 	 */
 	public boolean hasParams(final String[] names) {
 	
-		return hasParameters(names, null);
+		return hasParams(names, null);
 	}
 
 
@@ -292,7 +363,7 @@ public class NamedParamsRetriever
 		throws JSONRPC2Error {
 	
 		if (! hasParameters(mandatoryNames, optionalNames))
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throwMissingParameterException(mandatoryNames);
 	}
 
 
@@ -323,7 +394,7 @@ public class NamedParamsRetriever
 		throws JSONRPC2Error {
 		
 		if (! hasParameter(name))
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throwMissingParameterException(name);
 	}
 
 
@@ -407,11 +478,11 @@ public class NamedParamsRetriever
 				return; // ok
 		
 			else
-				throw JSONRPC2Error.INVALID_PARAMS;
+				throwNullParameterException(name);
 		}
 		
 		if (! clazz.isAssignableFrom(value.getClass()))
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throw newUnexpectedParameterTypeException(name);
 	}
 
 
@@ -497,7 +568,7 @@ public class NamedParamsRetriever
 			
 		} catch (ClassCastException e) {
 			
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throw newUnexpectedParameterTypeException(name);
 		}
 	}
 	
@@ -563,7 +634,7 @@ public class NamedParamsRetriever
 			
 		} catch (ClassCastException e) {
 			
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throw newUnexpectedParameterTypeException(name);
 		}
 	}
 	
@@ -1163,7 +1234,7 @@ public class NamedParamsRetriever
 			
 		} catch (ArrayStoreException e) {
 			
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throw newArrayException(name);
 		}
 	}
 	
@@ -1254,7 +1325,7 @@ public class NamedParamsRetriever
 			
 		} catch (ClassCastException e) {
 			
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throw newUnexpectedParameterTypeException(name);
 		}
 	}
 	
@@ -1304,7 +1375,7 @@ public class NamedParamsRetriever
 			
 		} catch (ClassCastException e) {
 			
-			throw JSONRPC2Error.INVALID_PARAMS;
+			throw newUnexpectedParameterTypeException(name);
 		}
 	}
 }
