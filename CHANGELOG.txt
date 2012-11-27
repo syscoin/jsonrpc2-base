@@ -172,3 +172,6 @@ version 1.28 (2012-11-11)
 	  old ones deprecated.
 	* Adds static JSONRPC2Error appendMessage and setData methods.
 	* Adds standard annotations.
+
+version 1.29 (2012-11-27)
+	* Converts JSONRPC2ParamsType to enum type.
