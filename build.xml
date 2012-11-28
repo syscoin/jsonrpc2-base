@@ -1,7 +1,7 @@
 <project name="JSON-RPC 2.0 Base" default="dist" basedir=".">
 
 	<property name="version" value="1.29"/>
-	<property name="version-date" value="2012-11-27"/>
+	<property name="version-date" value="2012-11-28"/>
 	<property name="jarfile" value="jsonrpc2-base-${version}.jar"/>
 	
 	<path id="classpath.compile">

@@ -1,7 +1,10 @@
 package com.thetransactioncompany.jsonrpc2.util;
 
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -12,7 +15,7 @@ import com.thetransactioncompany.jsonrpc2.*;
  * JUnit tests for the parameter retriever classes.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-11-11)
+ * @version $version$ (2012-11-28)
  */
 public class Test extends TestCase {
 
@@ -684,7 +687,6 @@ public class Test extends TestCase {
 	}
 	
 	
-	
 	public void testNamedNull() {
 	
 		Map m = new HashMap();
@@ -766,6 +768,118 @@ public class Test extends TestCase {
 			fail("Failed to raise exception");
 		} catch (JSONRPC2Error e) {
 			// ok
+		}
+	}
+
+
+	public void testJSONRPC2ErrorMessagesNamed() {
+
+
+		Map<String,Object> params = new HashMap<String,Object>();
+
+		NamedParamsRetriever r = new NamedParamsRetriever(params);
+
+
+		try {
+			r.getString("one");
+
+			fail("Failed to raise exception");
+		
+		} catch (JSONRPC2Error e) {
+
+			assertTrue(JSONRPC2Error.INVALID_PARAMS.equals(e));
+
+			assertEquals("Invalid parameters: Missing one parameter(s)", e.getMessage());
+		}
+
+
+		params.put("one", null);
+
+		r = new NamedParamsRetriever(params);
+
+		try {
+			r.ensureParam("one", String.class, false);
+
+			fail("Failed to raise exception");
+
+		} catch (JSONRPC2Error e) {
+
+			assertTrue(JSONRPC2Error.INVALID_PARAMS.equals(e));
+
+			assertEquals("Invalid parameters: Parameter one must not be null", e.getMessage());
+		}
+
+
+		params.put("two", 2);
+
+		r = new NamedParamsRetriever(params);
+
+		try {
+			r.getString("two");
+
+			fail("Failed to raise exception");
+		
+		} catch (JSONRPC2Error e) {
+
+			assertTrue(JSONRPC2Error.INVALID_PARAMS.equals(e));
+
+			assertEquals("Invalid parameters: Parameter two has an unexpected JSON type", e.getMessage());
+		}
+	}
+
+
+	public void testJSONRPC2ErrorMessagesPositional() {
+
+
+		List<Object> params = new LinkedList<Object>();
+
+		PositionalParamsRetriever r = new PositionalParamsRetriever(params);
+
+
+		try {
+			r.getString(0);
+
+			fail("Failed to raise exception");
+		
+		} catch (JSONRPC2Error e) {
+
+			assertTrue(JSONRPC2Error.INVALID_PARAMS.equals(e));
+
+			assertEquals("Invalid parameters: Missing parameter at position 0", e.getMessage());
+		}
+
+
+		params.add(null);
+
+		r = new PositionalParamsRetriever(params);
+
+		try {
+			r.ensureParam(0, String.class, false);
+
+			fail("Failed to raise exception");
+
+		} catch (JSONRPC2Error e) {
+
+			assertTrue(JSONRPC2Error.INVALID_PARAMS.equals(e));
+
+			assertEquals("Invalid parameters: Parameter at position 0 must not be null", e.getMessage());
+		}
+
+
+		params.add(2);
+
+		r = new PositionalParamsRetriever(params);
+
+		try {
+			r.getString(1);
+
+			fail("Failed to raise exception");
+		
+		} catch (JSONRPC2Error e) {
+
+			assertTrue(JSONRPC2Error.INVALID_PARAMS.equals(e));
+
+			assertEquals("Invalid parameters: Parameter at position 1 has an unexpected JSON type", e.getMessage());
 		}
 	}
 }
