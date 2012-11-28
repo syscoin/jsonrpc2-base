@@ -9,11 +9,17 @@ package com.thetransactioncompany.jsonrpc2;
  * <a href="http://groups.google.com/group/json-rpc">here</a>.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2010-05-18)
+ * @version $version$ (2012-11-28)
  */
 public class JSONRPC2ParseException extends Exception {
 	
 	
+	/**
+	 * Serial version UID.
+	 */
+	private static final long serialVersionUID = 3376608778436136410l;
+
+
 	/**
 	 * Indicates a parse exception caused by a JSON message not conforming
 	 * to the JSON-RPC 2.0 protocol.
