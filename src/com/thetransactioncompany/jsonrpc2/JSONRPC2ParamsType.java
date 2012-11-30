@@ -7,10 +7,10 @@ package com.thetransactioncompany.jsonrpc2;
  *
  * <ul>
  *     <li>{@link #NO_PARAMS} The method takes no parameters.
- *     <li>{@link #ARRAY} The method parameters are packed as a JSON array
- *         e.g. {@code ["val1", "val2", ...]}.
- *     <li>{@link #OBJECT} The method parameters are packed as a JSON object
- *         e.g. {@code {"param1":"val1", "param2":"val2", ...}}.
+ *     <li>{@link #ARRAY} The method takes positional parameters, packed as a 
+ *         JSON array, e.g. {@code ["val1", "val2", ...]}.
+ *     <li>{@link #OBJECT} The method takes named parameters, packed as a JSON 
+ *         object, e.g. {@code {"param1":"val1", "param2":"val2", ...}}.
  * </ul>
  *
  * <p>The JSON-RPC 2.0 specification and user group forum can be found 
@@ -29,13 +29,13 @@ public enum JSONRPC2ParamsType {
 	
 	
 	/**
-	 * The parameters are packed as a JSON array.
+	 * Positional parameters, packed as a JSON array.
 	 */
 	ARRAY,
 	
 	
 	/**
-	 * The parameters are packed as a JSON object.
+	 * Named parameters, packed as a JSON object.
 	 */
 	OBJECT
 }
