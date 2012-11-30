@@ -56,7 +56,7 @@ import net.minidev.json.JSONObject;
  * <a href="http://groups.google.com/group/json-rpc">here</a>.
  * 
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-11-11)
+ * @version $version$ (2012-11-30)
  */
 public abstract class JSONRPC2Message implements JSONAware {
 
@@ -216,30 +216,6 @@ public abstract class JSONRPC2Message implements JSONAware {
 	public Map<String,Object> getNonStdAttributes() {
 	
 		return nonStdAttributes;
-	}
-
-
-	/**
-	 * @see #getNonStdAttributes
-	 */
-	@Deprecated
-	public Map<String,Object> getNonStandardAttributes() {
-	
-		return getNonStdAttributes();
-	}
-	
-	
-	/** 
-	 * Returns a JSON object representing this JSON-RPC 2.0 message.
-	 *
-	 * <p>Use {@link #toJSONObject} instead.
-	 *
-	 * @return The JSON object.
-	 */
-	@Deprecated
-	public JSONObject toJSON() {
-	
-		return toJSONObject();
 	}
 	
 	

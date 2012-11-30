@@ -167,7 +167,8 @@ public class JSONRPC2Response extends JSONRPC2Message {
 	 * @throws JSONRPC2ParseException With detailed message if parsing 
 	 *                                failed.
 	 */
-	public static JSONRPC2Response parse(final String jsonString, final boolean preserveOrder)
+	public static JSONRPC2Response parse(final String jsonString, 
+		                             final boolean preserveOrder)
 		throws JSONRPC2ParseException {
 	
 		return parse(jsonString, preserveOrder, false, false);
@@ -190,7 +191,9 @@ public class JSONRPC2Response extends JSONRPC2Message {
 	 * @throws JSONRPC2ParseException With detailed message if the parsing 
 	 *                                failed.
 	 */
-	public static JSONRPC2Response parse(final String jsonString, final boolean preserveOrder, final boolean ignoreVersion)
+	public static JSONRPC2Response parse(final String jsonString, 
+		                             final boolean preserveOrder, 
+		                             final boolean ignoreVersion)
 		throws JSONRPC2ParseException {
 	
 		return parse(jsonString, preserveOrder, ignoreVersion, false);
@@ -300,8 +303,8 @@ public class JSONRPC2Response extends JSONRPC2Message {
 	
 	/** 
 	 * Gets the result of the request. The returned value has meaning
-	 * only if the request was successful. Use the {@link #getError getError}
-	 * method to check this.
+	 * only if the request was successful. Use the 
+	 * {@link #getError getError} method to check this.
 	 *
 	 * @return The result.
 	 */

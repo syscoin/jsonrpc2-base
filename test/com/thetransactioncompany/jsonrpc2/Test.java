@@ -1,7 +1,12 @@
 package com.thetransactioncompany.jsonrpc2;
 
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -10,7 +15,7 @@ import junit.framework.TestCase;
  * JUnit tests for the base JSON-RPC 2.0 classes.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-11-11)
+ * @version $version$ (2012-11-30)
  */
 public class Test extends TestCase {
 
@@ -78,7 +83,7 @@ public class Test extends TestCase {
 	}
 	
 	
-	public void testArrayParamsRequest() {
+	public void testPositionalParamsRequest() {
 	
 		// Create new request with array params
 		final String method = "rpc.test";
@@ -89,7 +94,7 @@ public class Test extends TestCase {
 		final boolean param2 = true;
 		final double param3 = 3.1415;
 		
-		List params = new LinkedList();
+		List<Object> params = new LinkedList<Object>();
 		params.add(param0);
 		params.add(param1);
 		params.add(param2);
@@ -102,7 +107,7 @@ public class Test extends TestCase {
 		assertEquals(method, request.getMethod());
 		assertEquals(id, request.getID());
 		
-		List paramsOut = (List)request.getParams();
+		List<Object> paramsOut = request.getPositionalParams();
 		assertEquals(param0, paramsOut.get(0));
 		assertEquals(param1, paramsOut.get(1));
 		assertEquals(param2, paramsOut.get(2));
@@ -124,7 +129,7 @@ public class Test extends TestCase {
 		assertEquals(method, request.getMethod());
 		assertEquals(id, request.getID());
 		
-		paramsOut = (List)request.getParams();
+		paramsOut = request.getPositionalParams();
 		assertEquals(param0, paramsOut.get(0));
 		assertEquals(param1, paramsOut.get(1));
 		assertEquals(param2, paramsOut.get(2));
@@ -132,7 +137,7 @@ public class Test extends TestCase {
 	}
 	
 	
-	public void testArrayParamsRequest2() {
+	public void testPositionalParamsRequest2() {
 	
 		// Create new request with array params
 		final String method = "rpc.test";
@@ -143,7 +148,7 @@ public class Test extends TestCase {
 		final boolean param2 = true;
 		final double param3 = 3.1415;
 		
-		List params = new LinkedList();
+		List<Object> params = new LinkedList<Object>();
 		params.add(param0);
 		params.add(param1);
 		params.add(param2);
@@ -156,7 +161,7 @@ public class Test extends TestCase {
 		assertEquals(method, request.getMethod());
 		assertEquals(id, request.getID());
 		
-		List paramsOut = (List)request.getParams();
+		List<Object> paramsOut = request.getPositionalParams();
 		assertEquals(param0, paramsOut.get(0));
 		assertEquals(param1, paramsOut.get(1));
 		assertEquals(param2, paramsOut.get(2));
@@ -179,7 +184,7 @@ public class Test extends TestCase {
 		assertEquals(method, request.getMethod());
 		assertEquals(id, request.getID());
 		
-		paramsOut = (List)request.getParams();
+		paramsOut = request.getPositionalParams();
 		assertEquals(param0, paramsOut.get(0));
 		assertEquals(param1, paramsOut.get(1));
 		assertEquals(param2, paramsOut.get(2));
@@ -187,7 +192,7 @@ public class Test extends TestCase {
 	}
 	
 	
-	public void testObjectParamsRequest() {
+	public void testNamedParamsRequest() {
 	
 		// Create new request with object parameters
 		final String method = "rpc.test";
@@ -198,7 +203,7 @@ public class Test extends TestCase {
 		final boolean paramC = true;
 		final double paramD = 3.1415;
 		
-		Map params = new HashMap();
+		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("name", paramA);
 		params.put("age", paramB);
 		params.put("bool", paramC);
@@ -211,7 +216,7 @@ public class Test extends TestCase {
 		assertEquals(method, request.getMethod());
 		assertEquals(id, request.getID());
 		
-		Map paramsOut = (Map)request.getParams();
+		Map<String,Object> paramsOut = request.getNamedParams();
 		assertEquals(paramA, paramsOut.get("name"));
 		assertEquals(paramB, paramsOut.get("age"));
 		assertEquals(paramC, paramsOut.get("bool"));
@@ -233,7 +238,7 @@ public class Test extends TestCase {
 		assertEquals(method, request.getMethod());
 		assertEquals(id, request.getID());
 		
-		paramsOut = (Map)request.getParams();
+		paramsOut = request.getNamedParams();
 		assertEquals(paramA, paramsOut.get("name"));
 		assertEquals(paramB, paramsOut.get("age"));
 		assertEquals(paramC, paramsOut.get("bool"));
@@ -241,7 +246,7 @@ public class Test extends TestCase {
 	}
 	
 	
-	public void testObjectParamsRequest2() {
+	public void testNamedParamsRequest2() {
 	
 		// Create new request with object parameters
 		final String method = "rpc.test";
@@ -252,7 +257,7 @@ public class Test extends TestCase {
 		final boolean paramC = true;
 		final double paramD = 3.1415;
 		
-		Map params = new HashMap();
+		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("name", paramA);
 		params.put("age", paramB);
 		params.put("bool", paramC);
@@ -265,7 +270,7 @@ public class Test extends TestCase {
 		assertEquals(method, request.getMethod());
 		assertEquals(id, request.getID());
 		
-		Map paramsOut = (Map)request.getParams();
+		Map<String,Object> paramsOut = request.getNamedParams();
 		assertEquals(paramA, paramsOut.get("name"));
 		assertEquals(paramB, paramsOut.get("age"));
 		assertEquals(paramC, paramsOut.get("bool"));
@@ -288,7 +293,7 @@ public class Test extends TestCase {
 		assertEquals(method, request.getMethod());
 		assertEquals(id, request.getID());
 		
-		paramsOut = (Map)request.getParams();
+		paramsOut = request.getNamedParams();
 		assertEquals(paramA, paramsOut.get("name"));
 		assertEquals(paramB, paramsOut.get("age"));
 		assertEquals(paramC, paramsOut.get("bool"));
@@ -543,9 +548,9 @@ public class Test extends TestCase {
 	}
 	
 	
-	public void testPreserveOrder() {
+	public void testRequestPreserveOrder() {
 	
-		Map params = new LinkedHashMap();
+		Map<String,Object> params = new LinkedHashMap<String,Object>();
 		params.put("one", 1);
 		params.put("two", 2);
 		params.put("three", 3);
@@ -557,10 +562,42 @@ public class Test extends TestCase {
 			req = JSONRPC2Request.parse(req.toString(), true);
 			
 		} catch (JSONRPC2ParseException e) {
+
+			e.printStackTrace();
+
 			fail(e.getMessage() + ": " + req.toString());
 		}
 		
-		Iterator it = ((Map)req.getParams()).keySet().iterator();
+		Iterator it = req.getNamedParams().keySet().iterator();
+	
+		assertEquals("one", (String)it.next());
+		assertEquals("two", (String)it.next());
+		assertEquals("three", (String)it.next());
+		assertEquals("four", (String)it.next());
+	}
+
+
+	public void testNotificationPreserveOrder() {
+	
+		Map<String,Object> params = new LinkedHashMap<String,Object>();
+		params.put("one", 1);
+		params.put("two", 2);
+		params.put("three", 3);
+		params.put("four", null);
+		
+		JSONRPC2Notification ntf = new JSONRPC2Notification("test", params);
+		
+		try {
+			ntf = JSONRPC2Notification.parse(ntf.toString(), true);
+			
+		} catch (JSONRPC2ParseException e) {
+
+			e.printStackTrace();
+
+			fail(e.getMessage() + ": " + ntf.toString());
+		}
+		
+		Iterator it = ntf.getNamedParams().keySet().iterator();
 	
 		assertEquals("one", (String)it.next());
 		assertEquals("two", (String)it.next());

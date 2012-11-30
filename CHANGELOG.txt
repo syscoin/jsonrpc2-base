@@ -177,3 +177,12 @@ version 1.29 (2012-11-28)
 	* Converts JSONRPC2ParamsType to enum type.
 	* {Positional|Named}ParamsRetriever detail cause on JSON-RPC 2.0
 	  "Invalid parameters" (-32602) error.
+
+version 1.30 (2012-11-30)
+	* Improves type safety of JSON-RPC 2.0 request and notification
+	  parameters by introducing dedicated setter and getter methods for
+	  positional and named parameters.
+	* Removes deprecated JSONRPC2Message.toJSON(), JSONRPC2Parser.noStrict()
+	  and JSONRPC2Parser.isNoStrict() methods.
+	* Adds type check for error objects during JSON-RPC 2.0 response
+	  parsing.

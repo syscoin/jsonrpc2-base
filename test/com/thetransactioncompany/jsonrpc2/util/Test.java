@@ -15,7 +15,7 @@ import com.thetransactioncompany.jsonrpc2.*;
  * JUnit tests for the parameter retriever classes.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-11-28)
+ * @version $version$ (2012-11-30)
  */
 public class Test extends TestCase {
 
@@ -49,7 +49,7 @@ public class Test extends TestCase {
 		
 		int nonExistingPosition = 7;
 		
-		List params = new LinkedList();
+		List<Object> params = new LinkedList<Object>();
 		params.add(param0);
 		params.add(param1);
 		params.add(param2);
@@ -71,7 +71,7 @@ public class Test extends TestCase {
 		}
 		
 		// Create new positional params instance
-		params = (List)request.getParams();
+		params = request.getPositionalParams();
 		PositionalParamsRetriever pp = new PositionalParamsRetriever(params);
 
 		assertTrue(pp.getParams() instanceof List);
@@ -170,7 +170,7 @@ public class Test extends TestCase {
 		String param6 = "one";
 		String[] param6enum = {"one", "two", "three"};
 		
-		Map params = new HashMap();
+		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("param0", param0);
 		params.put("param1", param1);
 		params.put("param2", param2);
@@ -197,7 +197,7 @@ public class Test extends TestCase {
 		}
 		
 		// Create new named params instance
-		params = (Map)request.getParams();
+		params = request.getNamedParams();
 		NamedParamsRetriever np = new NamedParamsRetriever(params);
 
 		assertTrue(np.getParams() instanceof Map);
