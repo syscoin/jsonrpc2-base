@@ -18,9 +18,10 @@ import java.util.*;
  * </ul>
  *
  * @author Vladimir Dzhuvinov
- * @version 2009-12-03
+ * @version 2012-11-30
  */
 public class Example1 {
+
 
 	public static void main(String[] args) {
 	
@@ -28,7 +29,7 @@ public class Example1 {
 		String method = "makePayment";
 		
 		// The required parameters to pass
-		Map params = new HashMap();
+		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("recipient", "Penny Adams");
 		params.put("amount", 175.05);
 		
@@ -59,6 +60,7 @@ public class Example1 {
 		
 		try {
 			reqIn = JSONRPC2Request.parse(jsonString);
+
 		} catch (JSONRPC2ParseException e) {
 			System.out.println(e.getMessage());
 			return;
@@ -67,7 +69,7 @@ public class Example1 {
 		// Extract the request data
 		System.out.println("Parsed request with properties :");
 		System.out.println("\tmethod     : " + reqIn.getMethod());
-		System.out.println("\tparameters : " + reqIn.getParams());
+		System.out.println("\tparameters : " + reqIn.getNamedParams());
 		System.out.println("\tid         : " + reqIn.getID() + "\n\n");
 		
 		
@@ -101,6 +103,7 @@ public class Example1 {
 		
 		try {
 			respIn = JSONRPC2Response.parse(jsonString);
+
 		} catch (JSONRPC2ParseException e) {
 			System.out.println(e.getMessage());
 			return;

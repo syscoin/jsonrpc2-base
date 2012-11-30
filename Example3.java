@@ -11,7 +11,7 @@ import java.util.*;
  * checking.
  *
  * @author Vladimir Dzhuvinov
- * @version 2010-02-12
+ * @version 2012-11-30
  */
 public class Example3 {
 
@@ -50,7 +50,7 @@ public class Example3 {
 		                   "with params of type " + paramsType);
 		
 		// Create named parameters instance from params Map
-		Map params = (Map)request.getParams();
+		Map<String,Object> params = request.getNamedParams();
 		NamedParamsRetriever np = new NamedParamsRetriever(params);
 		
 		// Extract parameters

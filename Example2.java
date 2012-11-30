@@ -5,17 +5,18 @@ import java.util.*;
 
 /** 
  * This example shows how to discern between received JSON-RPC 2.0 requests 
- * and notifications on the server side
+ * and notifications on the server side.
  *
  * @author Vladimir Dzhuvinov
- * @version 2009-12-03
+ * @version 2012-11-30
  */
 public class Example2 {
 
-	/** Parses a JSON-RPC 2.0 message and determines its type
+
+	/** 
+	 * Parses a JSON-RPC 2.0 message and determines its type
 	 *
-	 * @param jsonString The JSON-RPC 2.0 message encoded as
-	 *        JSON string
+	 * @param jsonString The JSON-RPC 2.0 message encoded as JSON string.
 	 */
 	public static void parseMessage(String jsonString) {
 	
@@ -45,14 +46,14 @@ public class Example2 {
 	
 		// Create request
 		String method = "getAccountBalance";
-		Map params = new HashMap();
+		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("accountHolder", "Penny Adams");
 		String id = "req-002";
 		JSONRPC2Request request = new JSONRPC2Request(method, params, id);
 		
 		// Create notification
 		method = "notifyRecipient";
-		params = new HashMap();
+		params = new HashMap<String,Object>();
 		params.put("recipient", "John Shilling");
 		JSONRPC2Notification notification = new JSONRPC2Notification(method, params);
 		
