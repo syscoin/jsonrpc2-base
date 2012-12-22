@@ -18,10 +18,10 @@ import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
  * (number, string, etc.) and whether the parameter is mandatory or optional:
  *
  * <ul>
- *     <li>{@code getXXX(param_name)} for mandatory parameters, where {@code XXX}
- *         is the expected parameter type.
- *     <li>{@code getOptXXX(param_name, default_value)} for optional parameters,
- *         specifying a default value.
+ *     <li>{@code getXXX(param_name)} for mandatory parameters, where 
+ *         {@code XXX} is the expected parameter type.
+ *     <li>{@code getOptXXX(param_name, default_value)} for optional 
+ *         parameters, specifying a default value.
  * </ul>
  * 
  * <p>There are also generic getter methods that let you do the type conversion 
@@ -70,14 +70,14 @@ import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
  * </pre>
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-11-27)
+ * @version $version$ (2012-12-21)
  */
 public class NamedParamsRetriever 
 	extends ParamsRetriever {
 
 	
 	/** 
-	 * The named params interface. 
+	 * The named parameters interface. 
 	 */
 	private Map<String,Object> params = null;
 
@@ -93,6 +93,11 @@ public class NamedParamsRetriever
 	private static void throwMissingParameterException(final String... names)
 		throws JSONRPC2Error {
 
+		if (names.length == 1)
+			throw JSONRPC2Error.INVALID_PARAMS.
+				appendMessage(": Missing \"" + names[0] + "\" parameter");
+
+		// Compose list of missing parameters
 		StringBuilder list = new StringBuilder();
 
 		for (int i=0; i < names.length; i++) {
@@ -100,11 +105,13 @@ public class NamedParamsRetriever
 			if (list.length() > 0)
 				list.append(',');
 
+			list.append('"');
 			list.append(names[i]);
+			list.append('"');
 		}
 
 		throw JSONRPC2Error.INVALID_PARAMS.
-			appendMessage(": Missing " + list.toString() + " parameter(s)");
+			appendMessage(": Missing " + list.toString() + " parameters");
 	}
 
 
@@ -120,7 +127,7 @@ public class NamedParamsRetriever
 		throws JSONRPC2Error {
 
 		throw JSONRPC2Error.INVALID_PARAMS.
-			appendMessage(": Parameter " + name + " must not be null");
+			appendMessage(": Parameter \"" + name + "\" must not be null");
 	}
 
 
@@ -135,7 +142,7 @@ public class NamedParamsRetriever
 	private static JSONRPC2Error newUnexpectedParameterTypeException(final String name) {
 
 		return JSONRPC2Error.INVALID_PARAMS.
-			appendMessage(": Parameter " + name + " has an unexpected JSON type");
+			appendMessage(": Parameter \"" + name + "\" has an unexpected JSON type");
 	}
 
 
@@ -149,7 +156,7 @@ public class NamedParamsRetriever
 	private static JSONRPC2Error newArrayException(final String name) {
 
 		return JSONRPC2Error.INVALID_PARAMS.
-			appendMessage(": Parameter " + name + " caused an array exception");
+			appendMessage(": Parameter \"" + name + "\" caused an array exception");
 	}
 
 
@@ -244,17 +251,18 @@ public class NamedParamsRetriever
 	
 	/**
 	 * Returns {@code true} if the parameters by the specified mandatory
-	 * names exist, {@code false} if any mandatory name is missing or a name
-	 * outside the mandatory and optional is present.
+	 * names exist, {@code false} if any mandatory name is missing or a 
+	 * name outside the mandatory and optional is present.
 	 *
 	 * @param mandatoryNames The expected mandatory parameter names.
 	 * @param optionalNames  The expected optional parameter names,
 	 *                       empty array or {@code null} if none.
 	 *
-	 * @return {@code true} if the specified mandatory names and only any of
-	 *         the optional are present, else {@code false}.
+	 * @return {@code true} if the specified mandatory names and only any 
+	 *         of the optional are present, else {@code false}.
 	 */
-	public boolean hasParams(final String[] mandatoryNames, final String[] optionalNames) {
+	public boolean hasParams(final String[] mandatoryNames, 
+		                 final String[] optionalNames) {
 	
 		// Do shallow copy of params
 		Map paramsCopy = (Map)((HashMap)params).clone();
@@ -292,7 +300,8 @@ public class NamedParamsRetriever
 	 * @see #hasParams(String[], String[])
 	 */
 	@Deprecated
-	public boolean hasParameters(final String[] mandatoryNames, final String[] optionalNames) {
+	public boolean hasParameters(final String[] mandatoryNames, 
+		                     final String[] optionalNames) {
 
 		return hasParams(mandatoryNames, optionalNames);
 	}
@@ -325,7 +334,7 @@ public class NamedParamsRetriever
 	 *                       the specified 
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public void ensureParams(String[] mandatoryNames)
+	public void ensureParams(final String[] mandatoryNames)
 		throws JSONRPC2Error {
 	
 		ensureParameters(mandatoryNames, null);
@@ -336,7 +345,7 @@ public class NamedParamsRetriever
 	 * @see #ensureParams(String[])
 	 */
 	@Deprecated
-	public void ensureParameters(String[] mandatoryNames)
+	public void ensureParameters(final String[] mandatoryNames)
 		throws JSONRPC2Error {
 
 		ensureParams(mandatoryNames);
@@ -359,7 +368,8 @@ public class NamedParamsRetriever
 	 *                       outside the specified mandatory and optional
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public void ensureParams(String[] mandatoryNames, String[] optionalNames)
+	public void ensureParams(final String[] mandatoryNames, 
+		                 final String[] optionalNames)
 		throws JSONRPC2Error {
 	
 		if (! hasParameters(mandatoryNames, optionalNames))
@@ -371,7 +381,8 @@ public class NamedParamsRetriever
 	 * @see #ensureParams(String[], String[])
 	 */
 	@Deprecated
-	public void ensureParameters(String[] mandatoryNames, String[] optionalNames)
+	public void ensureParameters(final String[] mandatoryNames, 
+		                     final String[] optionalNames)
 		throws JSONRPC2Error {
 
 		ensureParams(mandatoryNames, optionalNames);
@@ -463,7 +474,9 @@ public class NamedParamsRetriever
 	 * @throws JSONRPC2Error On a missing parameter or bad type 
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public <T> void ensureParam(final String name, final Class<T> clazz, final boolean allowNull)
+	public <T> void ensureParam(final String name, 
+		                    final Class<T> clazz, 
+		                    final boolean allowNull)
 		throws JSONRPC2Error {
 		
 		// First, check existence only
@@ -490,7 +503,9 @@ public class NamedParamsRetriever
 	 * @see #ensureParam(String, Class, boolean)
 	 */
 	@Deprecated
-	public <T> void ensureParameter(final String name, final Class<T> clazz, final boolean allowNull)
+	public <T> void ensureParameter(final String name, 
+		                        final Class<T> clazz, 
+		                        final boolean allowNull)
 		throws JSONRPC2Error {
 
 		ensureParam(name, clazz, allowNull);
@@ -524,9 +539,9 @@ public class NamedParamsRetriever
 	 *
 	 * @param name  The parameter name.
 	 * @param clazz The corresponding Java class that the parameter should 
-	 *              map to (any one of the return types of the {@code getXXX()} 
-	 *              getter methods. Set to {@code Object.class} to allow any
-	 *              type.
+	 *              map to (any one of the return types of the 
+	 *              {@code getXXX()}  getter methods. Set to 
+	 *              {@code Object.class} to allow any type.
 	 *
 	 * @return The parameter value.
 	 *
@@ -581,8 +596,8 @@ public class NamedParamsRetriever
 	 *
 	 * @param name         The parameter name.
 	 * @param clazz        The corresponding Java class that the parameter 
-	 *                     should map to (any one of the return types of the 
-	 *                     {@code getXXX()} getter methods. Set to 
+	 *                     should map to (any one of the return types of 
+	 *                     the {@code getXXX()} getter methods. Set to 
 	 *                     {@code Object.class} to allow any type.
 	 * @param defaultValue The default return value if the parameter
 	 *                     doesn't exist. May be {@code null}.
@@ -607,8 +622,8 @@ public class NamedParamsRetriever
 	 *
 	 * @param name         The parameter name.
 	 * @param clazz        The corresponding Java class that the parameter 
-	 *                     should map to (any one of the return types of the 
-	 *                     {@code getXXX()} getter methods. Set to 
+	 *                     should map to (any one of the return types of 
+	 *                     the {@code getXXX()} getter methods. Set to 
 	 *                     {@code Object.class} to allow any type.
 	 * @param allowNull    If {@code true} allows a {@code null} parameter
 	 *                     value.
@@ -621,7 +636,10 @@ public class NamedParamsRetriever
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T getOpt(final String name, final Class<T> clazz, final boolean allowNull, final T defaultValue)
+	public <T> T getOpt(final String name, 
+		            final Class<T> clazz, 
+		            final boolean allowNull, 
+		            final T defaultValue)
 		throws JSONRPC2Error {
 	
 		if (! hasParameter(name))
@@ -646,8 +664,9 @@ public class NamedParamsRetriever
 	 *
 	 * @return The parameter value as a string.
 	 *
-	 * @throws JSONRPC2Error On a missing parameter, bad type or {@code null}
-	 *                       value ({@link JSONRPC2Error#INVALID_PARAMS}).
+	 * @throws JSONRPC2Error On a missing parameter, bad type or 
+	 *                       {@code null} value 
+	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
 	public String getString(final String name)
 		throws JSONRPC2Error {
@@ -747,7 +766,9 @@ public class NamedParamsRetriever
 	 *                       bad enumeration value
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public String getEnumString(final String name, final String[] enumStrings, final boolean ignoreCase)
+	public String getEnumString(final String name, 
+		                    final String[] enumStrings, 
+		                    final boolean ignoreCase)
 		throws JSONRPC2Error {
 		
 		String value = get(name, String.class);
@@ -792,7 +813,10 @@ public class NamedParamsRetriever
 	 * @throws JSONRPC2Error On a bad type or bad enumeration value
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public String getOptEnumString(final String name, final String[] enumStrings, final String defaultValue, final boolean ignoreCase)
+	public String getOptEnumString(final String name, 
+		                       final String[] enumStrings, 
+		                       final String defaultValue, 
+		                       final boolean ignoreCase)
 		throws JSONRPC2Error {
 		
 		String value = getOpt(name, String.class, defaultValue);
@@ -839,7 +863,9 @@ public class NamedParamsRetriever
 	 *                       bad enumeration value
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public <T extends Enum<T>> T getEnum(final String name, final Class<T> enumClass, final boolean ignoreCase)
+	public <T extends Enum<T>> T getEnum(final String name, 
+		                             final Class<T> enumClass, 
+		                             final boolean ignoreCase)
 		throws JSONRPC2Error {
 		
 		String value = get(name, String.class);
@@ -863,7 +889,9 @@ public class NamedParamsRetriever
 	 * @throws JSONRPC2Error On a bad type or bad enumeration value
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public <T extends Enum<T>> T getOptEnum(final String name, final Class<T> enumClass, final T defaultValue)
+	public <T extends Enum<T>> T getOptEnum(final String name, 
+		                                final Class<T> enumClass, 
+		                                final T defaultValue)
 		throws JSONRPC2Error {
 		
 		return getOptEnum(name, enumClass, defaultValue, false); 
@@ -889,7 +917,10 @@ public class NamedParamsRetriever
 	 * @throws JSONRPC2Error On a bad type or bad enumeration value
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public <T extends Enum<T>> T getOptEnum(final String name, final Class<T> enumClass, final T defaultValue, final boolean ignoreCase)
+	public <T extends Enum<T>> T getOptEnum(final String name, 
+		                                final Class<T> enumClass, 
+		                                final T defaultValue, 
+		                                final boolean ignoreCase)
 		throws JSONRPC2Error {
 		
 		String value = getOpt(name, String.class, defaultValue.toString());
@@ -958,9 +989,9 @@ public class NamedParamsRetriever
 	
 	
 	/**
-	 * Retrieves the specified optional numeric parameter as an {@code int}. 
-	 * If it doesn't exist the method will return the specified default 
-	 * value.
+	 * Retrieves the specified optional numeric parameter as an 
+	 * {@code int}. If it doesn't exist the method will return the 
+	 * specified default value.
 	 *
 	 * @param name         The parameter name.
 	 * @param defaultValue The default return value if the parameter 
@@ -999,9 +1030,9 @@ public class NamedParamsRetriever
 	
 	
 	/**
-	 * Retrieves the specified optional numeric parameter as a {@code long}.
-	 * If it doesn't exist the method will return the specified default 
-	 * value.
+	 * Retrieves the specified optional numeric parameter as a 
+	 * {@code long}. If it doesn't exist the method will return the 
+	 * specified default value.
 	 *
 	 * @param name         The parameter name.
 	 * @param defaultValue The default return value if the parameter 
@@ -1180,7 +1211,9 @@ public class NamedParamsRetriever
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Object> getOptList(final String name, final boolean allowNull, final List<Object> defaultValue)
+	public List<Object> getOptList(final String name, 
+		                       final boolean allowNull, 
+		                       final List<Object> defaultValue)
 		throws JSONRPC2Error {
 	
 		return (List<Object>)getOpt(name, List.class, allowNull, defaultValue);
@@ -1277,7 +1310,9 @@ public class NamedParamsRetriever
 	 * @throws JSONRPC2Error On a bad parameter type
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public String[] getOptStringArray(final String name, final boolean allowNull, final String[] defaultValue)
+	public String[] getOptStringArray(final String name, 
+		                          final boolean allowNull, 
+		                          final String[] defaultValue)
 		throws JSONRPC2Error {
 	
 		if (! hasParameter(name))
@@ -1367,7 +1402,9 @@ public class NamedParamsRetriever
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
 	@SuppressWarnings("unchecked")
-	public Map<String,Object> getOptMap(final String name, final boolean allowNull, final Map<String,Object> defaultValue)
+	public Map<String,Object> getOptMap(final String name, 
+		                            final boolean allowNull, 
+		                            final Map<String,Object> defaultValue)
 		throws JSONRPC2Error {
 		
 		try {

@@ -1,16 +1,14 @@
 package com.thetransactioncompany.jsonrpc2.util;
 
 
-import java.lang.reflect.*;
-
-import com.thetransactioncompany.jsonrpc2.*;
+import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
 
 
 /**
  * The base abstract class for the JSON-RPC 2.0 parameter retrievers.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2011-10-08)
+ * @version $version$ (2012-12-21)
  */
 public abstract class ParamsRetriever {
 
@@ -31,7 +29,8 @@ public abstract class ParamsRetriever {
 	 * acceptable values.
 	 *
 	 * @param input       The string to check.
-	 * @param enumStrings The acceptable string values.
+	 * @param enumStrings The acceptable string values. Must not be 
+	 *                    {@code null}.
 	 * @param ignoreCase  {@code true} for a case insensitive match.
 	 *
 	 * @return The matching string value.
@@ -39,7 +38,9 @@ public abstract class ParamsRetriever {
 	 * @throws JSONRPC2Error With proper code and message if the input
 	 *                       string didn't match.
 	 */
-	protected static String ensureEnumString(final String input, final String[] enumStrings, final boolean ignoreCase)
+	protected static String ensureEnumString(final String input, 
+		                                 final String[] enumStrings, 
+		                                 final boolean ignoreCase)
 		throws JSONRPC2Error {
 	
 		for (final String en: enumStrings) {
@@ -69,7 +70,7 @@ public abstract class ParamsRetriever {
 	 *
 	 * @param input      The string to check.
 	 * @param enumClass  The enumeration class specifying the acceptable 
-	 *                   constant names.
+	 *                   constant names. Must not be {@code null}.
 	 * @param ignoreCase {@code true} for a case insensitive match.
 	 *
 	 * @return The matching enumeration constant.
@@ -77,7 +78,9 @@ public abstract class ParamsRetriever {
 	 * @throws JSONRPC2Error With proper code and message if the input
 	 *                       string didn't match.
 	 */
-	protected static <T extends Enum<T>> T ensureEnumString(final String input, final Class<T> enumClass, final boolean ignoreCase)
+	protected static <T extends Enum<T>> T ensureEnumString(final String input, 
+		                                                final Class<T> enumClass, 
+		                                                final boolean ignoreCase)
 		throws JSONRPC2Error {
 		
 		for (T en: enumClass.getEnumConstants()) {
