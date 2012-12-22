@@ -315,105 +315,42 @@ public class Test extends TestCase {
 	}
 	
 	
-	public void testEnsureEnumString() {
+	public void testgetEnumStringMatch() {
 	
 		String[] enumValues = {"ONE", "TWO", "THREE"};
 		
+
 		boolean ignoreCase = false;
 		
-		// test observe case correct
-		try {
-			ignoreCase = false;
-			ParamsRetriever.ensureEnumString("ONE", enumValues, ignoreCase);
-			
-		} catch (JSONRPC2Error e) {
-			fail("Unexpected ensureEnumString() exception: " + e.getMessage());
-		}
+		assertEquals("ONE", ParamsRetriever.getEnumStringMatch("ONE", enumValues, ignoreCase));
 		
+		assertNull(ParamsRetriever.getEnumStringMatch("one", enumValues, ignoreCase));
+
 		
-		// test observe case incorrect
-		try {
-			ignoreCase = false;
-			ParamsRetriever.ensureEnumString("one", enumValues, ignoreCase);
-			
-		} catch (JSONRPC2Error e) {
-			assertTrue(true);
-		}
-		
-		// test ignore case correct 1
-		try {
-			ignoreCase = true;
-			ParamsRetriever.ensureEnumString("ONE", enumValues, ignoreCase);
-			
-		} catch (JSONRPC2Error e) {
-			fail("Unexpected ensureEnumString() exception: " + e.getMessage());
-		}
-		
-		// test ignore case correct 2
-		try {
-			ignoreCase = true;
-			ParamsRetriever.ensureEnumString("one", enumValues, ignoreCase);
-			
-		} catch (JSONRPC2Error e) {
-			fail("Unexpected ensureEnumString() exception: " + e.getMessage());
-		}
-		
-		// test ignore case incorrect
-		try {
-			ignoreCase = true;
-			ParamsRetriever.ensureEnumString("four", enumValues, ignoreCase);
-			
-		} catch (JSONRPC2Error e) {
-			assertTrue(true);
-		}
+		ignoreCase = true;
+
+		assertEquals("ONE", ParamsRetriever.getEnumStringMatch("ONE", enumValues, ignoreCase));
+
+		assertEquals("ONE", ParamsRetriever.getEnumStringMatch("one", enumValues, ignoreCase));
+
+		assertNull(ParamsRetriever.getEnumStringMatch("four", enumValues, ignoreCase));
 	}
 	
 	
-	public void testEnsureEnumString2() {
+	public void testGetEnumMatch() {
 	
-		// test observe case correct
-		
 		boolean ignoreCase = false;
-		
-		try {
-			ParamsRetriever.ensureEnumString("MONDAY", TestEnumDay.class, ignoreCase);
-		
-		} catch (JSONRPC2Error e) {
-			fail("Unexpected ensureEnumString() exception: " + e.getMessage());
-		}
-		
-		
-		// test observe case incorrect
-		
-		try {
-			ParamsRetriever.ensureEnumString("SOMEDAY", TestEnumDay.class, ignoreCase);
-			fail("Failed to raise exception");
-			
-		} catch (JSONRPC2Error e) {
-			// ok
-		}
-		
-		
-		// test ignore case correct
-		
+
+		assertEquals(TestEnumDay.MONDAY, ParamsRetriever.getEnumStringMatch("MONDAY", TestEnumDay.class, ignoreCase));
+
+		assertNull(ParamsRetriever.getEnumStringMatch("SOMEDAY", TestEnumDay.class, ignoreCase));
+
+
 		ignoreCase = true;
-		
-		try {
-			ParamsRetriever.ensureEnumString("monday", TestEnumDay.class, ignoreCase);
-		
-		} catch (JSONRPC2Error e) {
-			fail("Unexpected ensureEnumString() exception: " + e.getMessage());
-		}
-		
-		// test observe case incorrect
-		
-		try {
-			ParamsRetriever.ensureEnumString("SOMEDAY", TestEnumDay.class, ignoreCase);
-			fail("Failed to raise exception");
-			
-		} catch (JSONRPC2Error e) {
-			// ok
-		}
+
+		assertEquals(TestEnumDay.MONDAY, ParamsRetriever.getEnumStringMatch("monday", TestEnumDay.class, ignoreCase));
+
+		assertNull(ParamsRetriever.getEnumStringMatch("SOMEDAY", TestEnumDay.class, ignoreCase));
 	}
 	
 	
@@ -548,6 +485,48 @@ public class Test extends TestCase {
 		} catch (JSONRPC2Error e) {
 			// ok
 		}
+	}
+
+
+	public void testOptEnumStringDefaultNull() {
+
+		Map m = new HashMap();
+
+		NamedParamsRetriever r = new NamedParamsRetriever(m);
+
+		String v = null;
+
+		try {
+
+			r.getOptEnumString("one", new String[]{"a", "b"}, null, true);
+
+		} catch (JSONRPC2Error e) {
+
+			fail(e.getMessage());
+		}
+
+		assertNull(v);
+	}
+
+
+	public void testOptEnumDefaultNull() {
+
+		Map m = new HashMap();
+
+		NamedParamsRetriever r = new NamedParamsRetriever(m);
+
+		String v = null;
+
+		try {
+
+			r.getOptEnum("one", TestEnumDay.class, null, true);
+
+		} catch (JSONRPC2Error e) {
+
+			fail(e.getMessage());
+		}
+
+		assertNull(v);
 	}
 	
 	

@@ -8,7 +8,7 @@ import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
  * The base abstract class for the JSON-RPC 2.0 parameter retrievers.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-12-21)
+ * @version $version$ (2012-12-22)
  */
 public abstract class ParamsRetriever {
 
@@ -16,32 +16,25 @@ public abstract class ParamsRetriever {
 	/**
 	 * Returns the parameter count.
 	 *
-	 * @return The number of parameters.
+	 * @return The parameters count.
 	 */
 	public abstract int size();
 
 
 	/**
-	 * Throws a {@code JSONRPC2Error.INVALID_PARAMS} exception if the input
-	 * string doesn't match a value in the specified string array.
+	 * Matches a string against an array of acceptable values.
 	 *
-	 * <p>This method is intended to check a string against a set of
-	 * acceptable values.
-	 *
-	 * @param input       The string to check.
+	 * @param input       The string to match.
 	 * @param enumStrings The acceptable string values. Must not be 
 	 *                    {@code null}.
 	 * @param ignoreCase  {@code true} for a case insensitive match.
 	 *
-	 * @return The matching string value.
-	 *
-	 * @throws JSONRPC2Error With proper code and message if the input
-	 *                       string didn't match.
+	 * @return The matching string value, {@code null} if no match was
+	 *         found.
 	 */
-	protected static String ensureEnumString(final String input, 
-		                                 final String[] enumStrings, 
-		                                 final boolean ignoreCase)
-		throws JSONRPC2Error {
+	protected static String getEnumStringMatch(final String input, 
+		                                   final String[] enumStrings, 
+		                                   final boolean ignoreCase) {
 	
 		for (final String en: enumStrings) {
 		
@@ -54,34 +47,25 @@ public abstract class ParamsRetriever {
 					return en;
 			}
 		}
-		
-		// No match -> raise error
-		throw JSONRPC2Error.INVALID_PARAMS;
+
+		return null;
 	}
 	
 	
 	/**
-	 * Throws a {@code JSONRPC2Error.INVALID_PARAMS} exception if the input
-	 * string doesn't match a constant name in the specified enumeration
-	 * class.
+	 * Matches a string against an enumeration of acceptable values.
 	 *
-	 * <p>This method is intended to check a string against a set of
-	 * acceptable values.
-	 *
-	 * @param input      The string to check.
+	 * @param input      The string to match.
 	 * @param enumClass  The enumeration class specifying the acceptable 
-	 *                   constant names. Must not be {@code null}.
+	 *                   string values. Must not be {@code null}.
 	 * @param ignoreCase {@code true} for a case insensitive match.
 	 *
-	 * @return The matching enumeration constant.
-	 *
-	 * @throws JSONRPC2Error With proper code and message if the input
-	 *                       string didn't match.
+	 * @return The matching enumeration constant, {@code null} if no match
+	 *         was found.
 	 */
-	protected static <T extends Enum<T>> T ensureEnumString(final String input, 
-		                                                final Class<T> enumClass, 
-		                                                final boolean ignoreCase)
-		throws JSONRPC2Error {
+	protected static <T extends Enum<T>> T getEnumStringMatch(final String input, 
+		                                                  final Class<T> enumClass, 
+		                                                  final boolean ignoreCase) {
 		
 		for (T en: enumClass.getEnumConstants()) {
 		
@@ -95,7 +79,6 @@ public abstract class ParamsRetriever {
 			}
 		}
 		
-		// No match -> raise error
-		throw JSONRPC2Error.INVALID_PARAMS;
+		return null;
 	}
 }

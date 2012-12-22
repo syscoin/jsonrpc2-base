@@ -68,7 +68,7 @@ import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
  * </pre>
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-12-21)
+ * @version $version$ (2012-12-22)
  */
 public class PositionalParamsRetriever
 	extends ParamsRetriever {
@@ -109,6 +109,76 @@ public class PositionalParamsRetriever
 
 		throw JSONRPC2Error.INVALID_PARAMS.
 			appendMessage(": Parameter at position " + position + " must not be null");
+	}
+
+
+	/**
+	 * Throws a JSON-RPC 2.0 error indicating a positional parameter with 
+	 * an unexpected enumerated value.
+	 *
+	 * @param position    The parameter position. Should be non-negative.
+	 * @param enumStrings The acceptable string values. Must not be 
+	 *                    {@code null}.
+	 *
+	 * @throws JSONRPC2Error Formatted JSON-RPC 2.0 error.
+	 */
+	private static void throwEnumParameterException(final int position, 
+		                                        final String[] enumStrings)
+		throws JSONRPC2Error {
+
+		StringBuilder msg = new StringBuilder(": Enumerated parameter at position " + 
+			position + "\" must have values ");
+
+		for (int i=0; i < enumStrings.length; i++) {
+
+			if (i > 0 && i == enumStrings.length - 1)
+				msg.append(" or ");
+
+			else if (i > 0)
+				msg.append(", ");
+
+			msg.append('"');
+			msg.append(enumStrings[i]);
+			msg.append('"');
+		}
+
+		throw JSONRPC2Error.INVALID_PARAMS.appendMessage(msg.toString());
+	}
+
+
+	/**
+	 * Throws a JSON-RPC 2.0 error indicating a positional parameter with 
+	 * an unexpected enumerated value.
+	 *
+	 * @param position  The parameter position. Should be non-negative.
+	 * @param enumClass The enumeration class specifying the acceptable 
+	 *                  string values. Must not be {@code null}.
+	 *
+	 * @throws JSONRPC2Error Formatted JSON-RPC 2.0 error.
+	 */
+	private static <T extends Enum<T>> void throwEnumParameterException(final int position, 
+		                                                            final Class<T> enumClass)
+		throws JSONRPC2Error {
+
+		StringBuilder msg = new StringBuilder(": Enumerated parameter at position " + 
+			position + " must have values ");
+
+		T[] constants = enumClass.getEnumConstants();
+
+		for (int i = 0; i < constants.length; i++) {
+		
+			if (i > 0 && i == constants.length - 1)
+				msg.append(" or ");
+
+			else if (i > 0)
+				msg.append(", ");
+
+			msg.append('"');
+			msg.append(constants[i].toString());
+			msg.append('"');
+		}
+
+		throw JSONRPC2Error.INVALID_PARAMS.appendMessage(msg.toString());
 	}
 
 
@@ -168,11 +238,6 @@ public class PositionalParamsRetriever
 	}
 	
 	
-	/**
-	 * Returns the number of available positional parameters.
-	 *
-	 * @return The number of positional parameters.
-	 */
 	@Override
 	public int size() {
 	
@@ -251,7 +316,8 @@ public class PositionalParamsRetriever
 	 * @param clazz    The corresponding Java class that the parameter 
 	 *                 should map to (any one of the return types of the 
 	 *                 {@code getXXX()} getter methods. Set to 
-	 *                 {@code Object.class} to allow any type.
+	 *                 {@code Object.class} to allow any type. Must not be
+	 *                 {@code null}.
 	 *
 	 * @throws JSONRPC2Error On a missing parameter, {@code null} value or 
 	 *                       bad type ({@link JSONRPC2Error#INVALID_PARAMS}).
@@ -276,8 +342,8 @@ public class PositionalParamsRetriever
 	
 	/**
 	 * Throws a {@code JSONRPC2Error.INVALID_PARAMS} exception if there is
-	 * no parameter at the specified position or its type doesn't map to the
-	 * specified.
+	 * no parameter at the specified position or its type doesn't map to 
+	 * the specified.
 	 *
 	 * <p>You may use this method to fire the proper JSON-RPC 2.0 error
 	 * on a missing or badly-typed mandatory parameter.
@@ -286,14 +352,17 @@ public class PositionalParamsRetriever
 	 * @param clazz     The corresponding Java class that the parameter 
 	 *                  should map to (any one of the return types of the 
 	 *                  {@code getXXX()} getter methods. Set to 
-	 *                  {@code Object.class} to allow any type.
+	 *                  {@code Object.class} to allow any type. Must not be
+	 *                  {@code null}.
 	 * @param allowNull If {@code true} allows a {@code null} parameter
 	 *                  value.
 	 *
 	 * @throws JSONRPC2Error On a missing parameter or bad type 
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public <T> void ensureParam(final int position, final Class<T> clazz, final boolean allowNull)
+	public <T> void ensureParam(final int position, 
+		                    final Class<T> clazz, 
+		                    final boolean allowNull)
 		throws JSONRPC2Error {
 		
 		// First, check existence only
@@ -319,7 +388,9 @@ public class PositionalParamsRetriever
 	 * @see #ensureParam(int, Class, boolean)
 	 */
 	@Deprecated
-	public <T> void ensureParameter(final int position, final Class<T> clazz, final boolean allowNull)
+	public <T> void ensureParameter(final int position, 
+		                        final Class<T> clazz, 
+		                        final boolean allowNull)
 		throws JSONRPC2Error {
 
 		ensureParam(position, clazz, allowNull);
@@ -355,7 +426,8 @@ public class PositionalParamsRetriever
 	 * @param clazz    The corresponding Java class that the parameter 
 	 *                 should map to (any one of the return types of the 
 	 *                 {@code getXXX()} getter methods. Set to
-	 *                 {@code Object.class} to allow any type.
+	 *                 {@code Object.class} to allow any type. Must not be
+	 *                 {@code null}.
 	 *
 	 * @return The parameter value.
 	 *
@@ -377,7 +449,8 @@ public class PositionalParamsRetriever
 	 * @param clazz     The corresponding Java class that the parameter 
 	 *                  should map to (any one of the return types of the 
 	 *                  {@code getXXX()} getter methods. Set to
-	 *                  {@code Object.class} to allow any type.
+	 *                  {@code Object.class} to allow any type. Must not be
+	 *                  {@code null}.
 	 * @param allowNull If {@code true} allows a {@code null} parameter
 	 *                  value.
 	 *
@@ -412,7 +485,8 @@ public class PositionalParamsRetriever
 	 * @param clazz        The corresponding Java class that the parameter 
 	 *                     should map to (any one of the return types of 
 	 *                     the {@code getXXX()} getter methods. Set to 
-	 *                     {@code Object.class} to allow any type.
+	 *                     {@code Object.class} to allow any type. Must not
+	 *                     be {@code null}.
 	 * @param defaultValue The default return value if the parameter
 	 *                     doesn't exist. May be {@code null}.
 	 *
@@ -438,7 +512,8 @@ public class PositionalParamsRetriever
 	 * @param clazz        The corresponding Java class that the parameter 
 	 *                     should map to (any one of the return types of 
 	 *                     the {@code getXXX()} getter methods. Set to 
-	 *                     {@code Object.class} to allow any type.
+	 *                     {@code Object.class} to allow any type. Must not
+	 *                     be {@code null}.
 	 * @param allowNull    If {@code true} allows a {@code null} parameter
 	 *                     value.
 	 * @param defaultValue The default return value if the parameter
@@ -450,7 +525,10 @@ public class PositionalParamsRetriever
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T getOpt(final int position, final Class<T> clazz, final boolean allowNull, final T defaultValue)
+	public <T> T getOpt(final int position, 
+		            final Class<T> clazz, 
+		            final boolean allowNull, 
+		            final T defaultValue)
 		throws JSONRPC2Error {
 	
 		if (! hasParameter(position))
@@ -548,7 +626,8 @@ public class PositionalParamsRetriever
 	 * Retrieves the specified enumerated string parameter.
 	 *
 	 * @param position    The parameter position.
-	 * @param enumStrings The acceptable string values.
+	 * @param enumStrings The acceptable string values. Must not be
+	 *                    {@code null}.
 	 *
 	 * @return The parameter value as a string.
 	 *
@@ -568,7 +647,8 @@ public class PositionalParamsRetriever
 	 * case insenstive match.
 	 *
 	 * @param position    The parameter position.
-	 * @param enumStrings The acceptable string values.
+	 * @param enumStrings The acceptable string values. Must not be
+	 *                    {@code null}.
 	 * @param ignoreCase  {@code true} for a case insensitive match.
 	 *
 	 * @return The matching parameter value as a string.
@@ -584,7 +664,12 @@ public class PositionalParamsRetriever
 		
 		String value = get(position, String.class);
 		
-		return ensureEnumString(value, enumStrings, ignoreCase);
+		String match = getEnumStringMatch(value, enumStrings, ignoreCase);
+
+		if (match == null)
+			throwEnumParameterException(position, enumStrings);
+
+		return match;
 	}
 	
 	
@@ -593,7 +678,8 @@ public class PositionalParamsRetriever
 	 * doesn't exist the method will return the specified default value.
 	 *
 	 * @param position     The parameter position.
-	 * @param enumStrings  The acceptable string values.
+	 * @param enumStrings  The acceptable string values. Must not be
+	 *                     {@code null}.
 	 * @param defaultValue The default return value if the parameter 
 	 *                     doesn't exist. May be {@code null}.
 	 *
@@ -617,7 +703,8 @@ public class PositionalParamsRetriever
 	 * will return the specified default value.
 	 *
 	 * @param position     The parameter position.
-	 * @param enumStrings  The acceptable string values.
+	 * @param enumStrings  The acceptable string values. Must not be
+	 *                     {@code null}.
 	 * @param defaultValue The default return value if the parameter 
 	 *                     doesn't exist. May be {@code null}.
 	 * @param ignoreCase   {@code true} for a case insensitive match.
@@ -634,18 +721,27 @@ public class PositionalParamsRetriever
 		throws JSONRPC2Error {
 		
 		String value = getOpt(position, String.class, defaultValue);
+
+		if (defaultValue == null && value == null)
+			return null;
 		
-		return ensureEnumString(value, enumStrings, ignoreCase);
+		String match = getEnumStringMatch(value, enumStrings, ignoreCase);
+
+		if (match == null)
+			throwEnumParameterException(position, enumStrings);
+
+		return match;
 	}
 	
 	
 	/**
-	 * Retrieves the specified enumerated parameter (from a JSON string that
-	 * has a predefined set of possible values).
+	 * Retrieves the specified enumerated parameter (from a JSON string 
+	 * that has a predefined set of possible values).
 	 *
 	 * @param position  The parameter position.
-	 * @param enumClass An enumeration type with constant names representing
-	 *                  the acceptable string values.
+	 * @param enumClass An enumeration type with constant names 
+	 *                  representing the acceptable string values. Must not
+	 *                  be {@code null}.
 	 *
 	 * @return The matching enumeration constant.
 	 *
@@ -661,13 +757,14 @@ public class PositionalParamsRetriever
 	
 	
 	/**
-	 * Retrieves the specified enumerated parameter (from a JSON string that
-	 * has a predefined set of possible values), allowing for a case 
+	 * Retrieves the specified enumerated parameter (from a JSON string 
+	 * that has a predefined set of possible values), allowing for a case 
 	 * insensitive match.
 	 *
 	 * @param position   The parameter position.
-	 * @param enumClass  An enumeration type with constant names representing
-	 *                   the acceptable string values.
+	 * @param enumClass  An enumeration type with constant names 
+	 *                   representing the acceptable string values. Must
+	 *                   not be {@code null}.
 	 * @param ignoreCase If {@code true} a case insensitive match against
 	 *                   the acceptable constant names is performed.
 	 *
@@ -684,7 +781,12 @@ public class PositionalParamsRetriever
 		
 		String value = get(position, String.class);
 		
-		return ensureEnumString(value, enumClass, ignoreCase);
+		T match = getEnumStringMatch(value, enumClass, ignoreCase);
+
+		if (match == null)
+			throwEnumParameterException(position, enumClass);
+
+		return match;
 	}
 	
 	
@@ -694,8 +796,9 @@ public class PositionalParamsRetriever
 	 * exist the method will return the specified default value.
 	 *
 	 * @param position     The parameter position.
-	 * @param enumClass    An enumeration type with constant names representing
-	 *                     the acceptable string values.
+	 * @param enumClass    An enumeration type with constant names 
+	 *                     representing the acceptable string values. Must
+	 *                     not be {@code null}.
 	 * @param defaultValue The default return value if the parameter 
 	 *                     doesn't exist. May be {@code null}.
 	 *
@@ -720,8 +823,9 @@ public class PositionalParamsRetriever
 	 * the specified default value.
 	 *
 	 * @param position     The parameter position.
-	 * @param enumClass    An enumeration type with constant names representing
-	 *                     the acceptable string values.
+	 * @param enumClass    An enumeration type with constant names 
+	 *                     representing the acceptable string values. Must
+	 *                     not be {@code null}.
 	 * @param defaultValue The default return value if the parameter 
 	 *                     doesn't exist. May be {@code null}.
 	 * @param ignoreCase   If {@code true} a case insensitive match against
@@ -739,8 +843,16 @@ public class PositionalParamsRetriever
 		throws JSONRPC2Error {
 		
 		String value = getOpt(position, String.class, defaultValue);
+
+		if (defaultValue == null && value == null)
+			return null;
 		
-		return ensureEnumString(value, enumClass, ignoreCase);
+		T match = getEnumStringMatch(value, enumClass, ignoreCase);
+
+		if (match == null)
+			throwEnumParameterException(position, enumClass);
+
+		return match;
 	}
 	
 	
@@ -1125,7 +1237,9 @@ public class PositionalParamsRetriever
 	 * @throws JSONRPC2Error On a bad parameter type
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
-	public String[] getOptStringArray(final int position, final boolean allowNull, final String[] defaultValue)
+	public String[] getOptStringArray(final int position, 
+		                          final boolean allowNull, 
+		                          final String[] defaultValue)
 		throws JSONRPC2Error {
 	
 		if (! hasParameter(position))
@@ -1215,7 +1329,9 @@ public class PositionalParamsRetriever
 	 *                       ({@link JSONRPC2Error#INVALID_PARAMS}).
 	 */
 	@SuppressWarnings("unchecked")
-	public Map<String,Object> getOptMap(final int position, final boolean allowNull, final Map<String,Object> defaultValue)
+	public Map<String,Object> getOptMap(final int position, 
+		                            final boolean allowNull, 
+		                            final Map<String,Object> defaultValue)
 		throws JSONRPC2Error {
 	
 		try {
