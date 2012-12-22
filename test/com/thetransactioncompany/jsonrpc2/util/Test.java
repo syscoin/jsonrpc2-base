@@ -15,7 +15,7 @@ import com.thetransactioncompany.jsonrpc2.*;
  * JUnit tests for the parameter retriever classes.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-11-30)
+ * @version $version$ (2012-12-22)
  */
 public class Test extends TestCase {
 
@@ -789,7 +789,7 @@ public class Test extends TestCase {
 
 			assertTrue(JSONRPC2Error.INVALID_PARAMS.equals(e));
 
-			assertEquals("Invalid parameters: Missing one parameter(s)", e.getMessage());
+			assertEquals("Invalid parameters: Missing \"one\" parameter", e.getMessage());
 		}
 
 
@@ -806,7 +806,7 @@ public class Test extends TestCase {
 
 			assertTrue(JSONRPC2Error.INVALID_PARAMS.equals(e));
 
-			assertEquals("Invalid parameters: Parameter one must not be null", e.getMessage());
+			assertEquals("Invalid parameters: Parameter \"one\" must not be null", e.getMessage());
 		}
 
 
@@ -823,7 +823,7 @@ public class Test extends TestCase {
 
 			assertTrue(JSONRPC2Error.INVALID_PARAMS.equals(e));
 
-			assertEquals("Invalid parameters: Parameter two has an unexpected JSON type", e.getMessage());
+			assertEquals("Invalid parameters: Parameter \"two\" has an unexpected JSON type", e.getMessage());
 		}
 	}
 
