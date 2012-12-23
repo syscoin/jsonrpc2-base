@@ -12,10 +12,10 @@ import com.thetransactioncompany.jsonrpc2.*;
 
 
 /**
- * JUnit tests for the parameter retriever classes.
+ * Parameter retriever tests.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-12-22)
+ * @version $version$ (2012-12-23)
  */
 public class Test extends TestCase {
 
@@ -352,6 +352,46 @@ public class Test extends TestCase {
 
 		assertNull(ParamsRetriever.getEnumStringMatch("SOMEDAY", TestEnumDay.class, ignoreCase));
 	}
+
+
+	public void testGetEnumPositionalDefaultNull() {
+
+		List l = new LinkedList();
+
+		PositionalParamsRetriever r = new PositionalParamsRetriever(l);
+
+		TestEnumDay day = null;
+
+		try {
+			day = r.getOptEnum(0, TestEnumDay.class, null);
+
+		} catch (JSONRPC2Error e) {
+
+			fail(e.getMessage());
+		}
+
+		assertNull(day);
+	}
+
+
+	public void testGetEnumNamedDefaultNull() {
+
+		Map m = new HashMap();
+
+		NamedParamsRetriever r = new NamedParamsRetriever(m);
+
+		TestEnumDay day = null;
+
+		try {
+			day = r.getOptEnum("day", TestEnumDay.class, null);
+
+		} catch (JSONRPC2Error e) {
+
+			fail(e.getMessage());
+		}
+
+		assertNull(day);
+	}
 	
 	
 	public void testGetEnumPositional() {
@@ -391,6 +431,8 @@ public class Test extends TestCase {
 			
 		} catch (JSONRPC2Error e) {
 			// ok
+			assertEquals("Invalid parameters: Enumerated parameter at position 2 must have values \"SUNDAY\", \"MONDAY\", \"TUESDAY\", \"WEDNESDAY\", \"THURSDAY\", \"FRIDAY\" or \"SATURDAY\"",
+			             e.getMessage());
 		}
 	}
 	
@@ -432,6 +474,8 @@ public class Test extends TestCase {
 			
 		} catch (JSONRPC2Error e) {
 			// ok
+			assertEquals("Invalid parameters: Enumerated parameter \"Eintag\" must have values \"SUNDAY\", \"MONDAY\", \"TUESDAY\", \"WEDNESDAY\", \"THURSDAY\", \"FRIDAY\" or \"SATURDAY\"",
+				     e.getMessage());
 		}
 	}
 	
