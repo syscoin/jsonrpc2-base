@@ -189,3 +189,6 @@ version 1.30 (2012-11-30)
 
 version 1.31 (2012-12-23)
 	* Refactors retrieval of positional and named parameters.
+
+version 1.32 (2013-02-19)
+	* Corrects null argument treatment in JSONRPC2Parser.
