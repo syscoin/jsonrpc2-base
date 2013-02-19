@@ -1,6 +1,6 @@
 CHANGE LOG
 
-JSON-RPC 2.0 Base, Copyright (c) Vladimir Dzhuvinov, 2009 - 2012
+JSON-RPC 2.0 Base, Copyright (c) Vladimir Dzhuvinov, 2009 - 2013
 
 
 version 1.0 (2009-10-04)

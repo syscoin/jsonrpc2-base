@@ -1,6 +1,6 @@
 JSON-RPC 2.0 Base
 
-Copyright (c) Vladimir Dzhuvinov, 2009 - 2012
+Copyright (c) Vladimir Dzhuvinov, 2009 - 2013
 
 
 README

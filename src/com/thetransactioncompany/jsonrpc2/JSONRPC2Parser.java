@@ -57,7 +57,7 @@ import net.minidev.json.parser.ParseException;
  * <a href="http://groups.google.com/group/json-rpc">here</a>.
  * 
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-11-30)
+ * @version $version$ (2013-02-19)
  */
 public class JSONRPC2Parser {
 
@@ -185,11 +185,6 @@ public class JSONRPC2Parser {
 	@SuppressWarnings("unchecked")
 	private Map<String,Object> parseJSONObject(final String jsonString)
 		throws JSONRPC2ParseException {
-	
-		if (jsonString == null)
-			throw new JSONRPC2ParseException("Null argument", 
-				                         JSONRPC2ParseException.JSON, 
-				                         null);
 		
 		if (jsonString.trim().length()==0)
 			throw new JSONRPC2ParseException("Invalid JSON: Empty string", 

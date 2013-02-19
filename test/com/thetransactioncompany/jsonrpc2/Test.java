@@ -15,7 +15,7 @@ import junit.framework.TestCase;
  * JUnit tests for the base JSON-RPC 2.0 classes.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-11-30)
+ * @version $version$ (2013-02-19)
  */
 public class Test extends TestCase {
 
@@ -377,45 +377,6 @@ public class Test extends TestCase {
 		assertEquals(JSONRPC2Error.METHOD_NOT_FOUND.getCode(), err.getCode());
 		assertEquals(JSONRPC2Error.METHOD_NOT_FOUND.getMessage(), err.getMessage());
 		assertEquals(id, response.getID());
-	}
-	
-	
-	public void testParseRequestExceptionNull() {
-	
-		try {
-			JSONRPC2Request.parse(null);
-			fail("Failed to raise parse exception");
-			
-		} catch (JSONRPC2ParseException e) {
-			// ok
-			assertEquals(JSONRPC2ParseException.JSON, e.getCauseType());
-		}
-	}
-	
-	
-	public void testParseNotificationExceptionNull() {
-	
-		try {
-			JSONRPC2Notification.parse(null);
-			fail("Failed to raise parse exception");
-			
-		} catch (JSONRPC2ParseException e) {
-			// ok
-			assertEquals(JSONRPC2ParseException.JSON, e.getCauseType());
-		}
-	}
-	
-	
-	public void testParseResponseExceptionNull() {
-	
-		try {
-			JSONRPC2Response.parse(null);
-			fail("Failed to raise parse exception");
-			
-		} catch (JSONRPC2ParseException e) {
-			// ok
-			assertEquals(JSONRPC2ParseException.JSON, e.getCauseType());
-		}
 	}
 	
 	
