@@ -7,7 +7,7 @@
 	
 	<groupId>com.thetransactioncompany</groupId>
 	<artifactId>jsonrpc2-base</artifactId>
-	<version>1.33</version>
+	<version>1.34</version>
 	<packaging>jar</packaging>
 	
 	<name>JSON-RPC 2.0 Base</name>

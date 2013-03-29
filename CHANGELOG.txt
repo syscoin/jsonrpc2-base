@@ -195,3 +195,6 @@ version 1.32 (2013-02-19)
 
 version 1.33 (2013-03-29)
 	* Switches project build from Ant to Maven.
+
+version 1.34 (2013-03-29)
+	* Updates Maven assembly plugin configuration.
