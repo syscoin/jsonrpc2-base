@@ -31,9 +31,7 @@ Package content:
 	CHANGELOG.txt               The change log.
 	
 	jsonrpc2-base-{version}.jar JAR file containing the compiled package
-	                            classes as well as the classes of the 
-				    required JSON Smart package for JSON 
-				    encoding and decoding.
+	                            classes.
 
 	Example1.java               Example showing the complete life cycle of a 
 	                            JSON-RPC 2.0 request.
@@ -51,13 +49,11 @@ Package content:
 				  
 	javadoc/                    The Java Docs for this package.
 	
-	build.xml                   The Apache Ant build file.
+	pom.xml                     The Maven build file.
 	
-	lib/                        The package dependencies and their licenses.
+	lib/                        The package dependencies.
         
 	src/			    The source code for this package.
-	
-	test/                       JUnit tests for this package.
 
 
 

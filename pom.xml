@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.thetransactioncompany</groupId>
+	<artifactId>jsonrpc2-base</artifactId>
+	<version>1.33</version>
+	<packaging>jar</packaging>
+	
+	<name>JSON-RPC 2.0 Base</name>
+	<description>Java classes to represent, parse and serialise JSON-RPC 2.0
+		requests, notifications and responses. 
+	</description>
+
+	<url>http://software.dzhuvinov.com/json-rpc-2.0-base.html</url>
+
+	<organization>
+		<name>The Transaction Company</name>
+		<url>http://software.dzhuvinov.com/</url>
+	</organization>
+    
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+    
+	<scm>
+		<connection>scm:git:https://vdzhuvinov@bitbucket.org/vdzhuvinov/json-rpc-2.0-base.git</connection>
+		<developerConnection>scm:git:git@bitbucket.org:vdzhuvinov/json-rpc-2.0-base.git</developerConnection>
+		<url>https://bitbucket.org/vdzhuvinov/json-rpc-2.0-base</url>
+		<tag>HEAD</tag>
+	</scm>
+    
+	<developers>
+		<developer>
+			<id>vdzhuvinov</id>
+			<name>Vladimir Dzhuvinov</name>
+			<email>vladimir@dzhuvinov.com</email>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>net.minidev</groupId>
+			<artifactId>json-smart</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.0</version>
+					<configuration>
+						<target>1.6</target>
+						<compilerArgument>-Xlint</compilerArgument>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.2</version>
+				<configuration>
+					<includes>
+						<include>target/site/apidocs/**/*.html</include>
+					</includes>
+					<regex>false</regex>
+					<replacements>
+						<replacement>
+							<token>$version$</token>
+							<value>${project.version}</value>
+						</replacement>         
+					</replacements>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>site</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<descriptors>
+						<descriptor>assembly.xml</descriptor>
+          				</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<linksource>true</linksource>
+				</configuration>
+			</plugin>
+			
+		</plugins>
+	</reporting>
+	
+</project>

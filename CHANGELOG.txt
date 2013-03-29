@@ -192,3 +192,6 @@ version 1.31 (2012-12-23)
 
 version 1.32 (2013-02-19)
 	* Corrects null argument treatment in JSONRPC2Parser.
+
+version 1.33 (2013-03-29)
+	* Switches project build from Ant to Maven.

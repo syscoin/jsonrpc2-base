@@ -1,6 +1,1 @@
-/procsrc/
-/build/
-/javadoc/
-/TEST*
-/jsonrpc2-base-*.jar
-/JsonRpc2-Base.zip
+/target/
