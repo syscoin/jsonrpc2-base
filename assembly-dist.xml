@@ -17,7 +17,7 @@
 				<include>LICENSE.txt</include>
 				<include>CHANGELOG.txt</include>
 				<include>pom.xml</include>
-				<include>assembly.xml</include>
+				<include>assembly-dist.xml</include>
 				<include>Example*.java</include>
 			</includes>
 		</fileSet>
