@@ -198,3 +198,6 @@ version 1.33 (2013-03-29)
 
 version 1.34 (2013-03-29)
 	* Updates Maven assembly plugin configuration.
+
+version 1.34.1 (2013-03-29)
+	* Updates Maven pom.xml.
