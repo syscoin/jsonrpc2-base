@@ -35,7 +35,7 @@
 	</licenses>
     
 	<scm>
-		<connection>scm:git:https://bitbucket.org/thetransactioncompany/json-rpc-2.0-base.git</connection>
+		<connection>scm:git:git@bitbucket.org:thetransactioncompany/json-rpc-2.0-base.git</connection>
 		<developerConnection>scm:git:git@bitbucket.org:thetransactioncompany/json-rpc-2.0-base.git</developerConnection>
 		<url>https://bitbucket.org/thetransactioncompany/json-rpc-2.0-base</url>
 		<tag>1.34.3</tag>
