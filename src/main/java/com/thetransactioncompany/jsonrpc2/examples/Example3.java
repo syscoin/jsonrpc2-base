@@ -1,3 +1,6 @@
+package com.thetransactioncompany.jsonrpc2.examples;
+
+
 import com.thetransactioncompany.jsonrpc2.*;
 import com.thetransactioncompany.jsonrpc2.util.*;
 
@@ -6,12 +9,12 @@ import java.util.*;
 
 /** 
  * This example demonstrates the use of the utility classes 
- * PositionalParamsRetriever and NamedParamsRetriever to extract parameters 
- * from incoming requests and notifications with proper type and optional value 
- * checking.
+ * {@link com.thetransactioncompany.jsonrpc2.util.PositionalParamsRetriever} 
+ * and {@link com.thetransactioncompany.jsonrpc2.util.NamedParamsRetriever} to 
+ * extract parameters from incoming requests and notifications with proper type 
+ * and optional value checking.
  *
  * @author Vladimir Dzhuvinov
- * @version 2012-11-30
  */
 public class Example3 {
 

@@ -68,7 +68,6 @@ import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
  * </pre>
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-12-22)
  */
 public class PositionalParamsRetriever
 	extends ParamsRetriever {

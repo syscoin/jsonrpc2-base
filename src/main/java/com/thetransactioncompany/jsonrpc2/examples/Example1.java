@@ -1,10 +1,14 @@
-import com.thetransactioncompany.jsonrpc2.*;
+package com.thetransactioncompany.jsonrpc2.examples;
+
 
 import java.util.*;
 
+import com.thetransactioncompany.jsonrpc2.*;
+
 
 /** 
- * This example illustrates a typical life-cycle of a JSON-RPC 2.0 request:
+ * This example illustrates the typical life-cycle of a JSON-RPC 2.0 request.
+ *
  * <ul>
  *     <li>Client side: Create new request
  *     <li>Client side: Serialise request to string and send
@@ -13,12 +17,10 @@ import java.util.*;
  *     <li>Server side: Create a response
  *     <li>Server side: Serialise response to string and send back
  *     <li>Client side: Parse received string back to response object
- *     <li>Client side: Check the response for success, get the
- *         result/error
+ *     <li>Client side: Check the response for success, get the result / error
  * </ul>
  *
  * @author Vladimir Dzhuvinov
- * @version 2012-11-30
  */
 public class Example1 {
 
@@ -116,8 +118,8 @@ public class Example1 {
 			
 			System.out.println("\tresult : " + respIn.getResult());
 			System.out.println("\tid     : " + respIn.getID());
-		}
-		else {
+
+		} else {
 			System.out.println("The request failed :");
 			
 			JSONRPC2Error err = respIn.getError();

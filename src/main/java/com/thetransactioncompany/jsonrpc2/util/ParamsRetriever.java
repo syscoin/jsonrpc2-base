@@ -8,7 +8,6 @@ import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
  * The base abstract class for the JSON-RPC 2.0 parameter retrievers.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-12-22)
  */
 public abstract class ParamsRetriever {
 

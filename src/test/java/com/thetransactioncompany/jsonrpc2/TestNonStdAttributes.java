@@ -14,7 +14,6 @@ import junit.framework.*;
  * messages.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-11-11)
  */
 public class TestNonStdAttributes extends TestCase {
 

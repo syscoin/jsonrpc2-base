@@ -15,7 +15,6 @@ import com.thetransactioncompany.jsonrpc2.*;
  * Parameter retriever tests.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$ (2012-12-23)
  */
 public class Test extends TestCase {
 

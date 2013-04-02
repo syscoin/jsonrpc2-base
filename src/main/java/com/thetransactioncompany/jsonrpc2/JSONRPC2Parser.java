@@ -57,7 +57,6 @@ import net.minidev.json.parser.ParseException;
  * <a href="http://groups.google.com/group/json-rpc">here</a>.
  * 
  * @author Vladimir Dzhuvinov
- * @version $version$ (2013-02-19)
  */
 public class JSONRPC2Parser {
 

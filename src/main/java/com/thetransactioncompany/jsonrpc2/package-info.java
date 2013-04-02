@@ -23,7 +23,6 @@
  * website.
  *
  * @author Vladimir Dzhuvinov
- * @version $version$
  */
 package com.thetransactioncompany.jsonrpc2;
 

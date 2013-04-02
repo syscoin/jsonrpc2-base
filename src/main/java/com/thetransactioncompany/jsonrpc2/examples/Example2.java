@@ -1,6 +1,9 @@
-import com.thetransactioncompany.jsonrpc2.*;
+package com.thetransactioncompany.jsonrpc2.examples;
+
 
 import java.util.*;
+
+import com.thetransactioncompany.jsonrpc2.*;
 
 
 /** 
@@ -8,7 +11,6 @@ import java.util.*;
  * and notifications on the server side.
  *
  * @author Vladimir Dzhuvinov
- * @version 2012-11-30
  */
 public class Example2 {
 
