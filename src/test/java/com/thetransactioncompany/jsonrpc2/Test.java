@@ -630,4 +630,32 @@ public class Test extends TestCase {
 		
 		assertFalse(err1.equals(err2));
 	}
+
+
+	public void testErrorSetData() {
+
+		JSONRPC2Error err = new JSONRPC2Error(100, "Error");
+
+		assertNull(err.getData());
+
+		JSONRPC2Error newErr = err.setData("xyz");
+
+		assertEquals(100, newErr.getCode());
+		assertEquals("Error", newErr.getMessage());
+		assertEquals("xyz", (String)newErr.getData());
+	}
+
+
+	public void testErrorAppendMessage() {
+
+		JSONRPC2Error err = new JSONRPC2Error(100, "Error");
+
+		assertNull(err.getData());
+
+		JSONRPC2Error newErr = err.appendMessage(": xyz");
+
+		assertEquals(100, newErr.getCode());
+		assertEquals("Error: xyz", newErr.getMessage());
+		assertNull(newErr.getData());
+	}
 }

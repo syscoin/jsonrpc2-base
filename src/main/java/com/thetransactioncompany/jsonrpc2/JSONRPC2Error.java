@@ -113,6 +113,7 @@ public class JSONRPC2Error extends Exception {
 	 *
 	 * @return A new JSON-RPC 2.0 error with the appended message.
 	 */
+	@Deprecated
 	public static JSONRPC2Error appendMessage(final JSONRPC2Error err, final String apx) {
 
 		return new JSONRPC2Error(err.getCode(), err.getMessage() + apx, err.getData());
@@ -129,6 +130,7 @@ public class JSONRPC2Error extends Exception {
 	 *
 	 * @return A new JSON-RPC 2.0 error with the set data.
 	 */
+	@Deprecated
 	public static JSONRPC2Error setData(final JSONRPC2Error err, final Object data) {
 
 		return new JSONRPC2Error(err.getCode(), err.getMessage(), data);
@@ -186,6 +188,20 @@ public class JSONRPC2Error extends Exception {
 	public Object getData() {
 		
 		return data;	
+	}
+
+
+	/**
+	 * Sets the specified data to a JSON-RPC 2.0 error.
+	 *
+	 * @param data Optional error data, must <a href="#map">map</a> to a 
+	 *             valid JSON type.
+	 *
+	 * @return A new JSON-RPC 2.0 error with the set data.
+	 */
+	public JSONRPC2Error setData(final Object data) {
+
+		return new JSONRPC2Error(code, getMessage(), data);
 	}
 
 
@@ -254,6 +270,8 @@ public class JSONRPC2Error extends Exception {
 	@Override
         public boolean equals(Object object) {
         
-                return object instanceof JSONRPC2Error && code == ((JSONRPC2Error)object).getCode();
+                return object != null &&
+                       object instanceof JSONRPC2Error && 
+                       code == ((JSONRPC2Error)object).getCode();
         }
 }
