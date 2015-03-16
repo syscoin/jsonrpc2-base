@@ -15,7 +15,7 @@ Requirements:
 
     * The package depends on the JSON Smart library for JSON encoding and
       decoding (fork of the popular JSON.simple toolkit, but with more
-      efficent parsing).
+      efficient parsing).
 
 
 Visit the library home page for usage, examples and updates:
