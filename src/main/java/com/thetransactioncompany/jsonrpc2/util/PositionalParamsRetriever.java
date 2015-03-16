@@ -1,7 +1,6 @@
 package com.thetransactioncompany.jsonrpc2.util;
 
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -253,11 +252,8 @@ public class PositionalParamsRetriever
 	 * @return {@code true} if the parameter exists, else {@code false}.
 	 */
 	public boolean hasParam(final int position) {
-	
-		if (position >= params.size())
-			return false;
-		else
-			return true;
+
+		return position < params.size();
 	}
 
 
@@ -1189,7 +1185,7 @@ public class PositionalParamsRetriever
 			return null;
 		
 		try {
-			return list.toArray(new String[0]);
+			return list.toArray(new String[list.size()]);
 			
 		} catch (ArrayStoreException e) {
 			

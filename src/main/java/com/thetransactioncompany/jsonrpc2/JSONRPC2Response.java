@@ -356,11 +356,8 @@ public class JSONRPC2Response extends JSONRPC2Message {
 	 *         there was an error.
 	 */
 	public boolean indicatesSuccess() {
-		
-		if (error == null)
-			return true;
-		else
-			return false;
+
+		return error == null;
 	}
 	
 	

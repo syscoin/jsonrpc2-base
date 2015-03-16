@@ -58,7 +58,7 @@ public class Example1 {
 		
 	
 		// Parse request string
-		JSONRPC2Request reqIn = null;
+		JSONRPC2Request reqIn;
 		
 		try {
 			reqIn = JSONRPC2Request.parse(jsonString);
@@ -101,7 +101,7 @@ public class Example1 {
 		
 		
 		// Parse response string
-		JSONRPC2Response respIn = null;
+		JSONRPC2Response respIn;
 		
 		try {
 			respIn = JSONRPC2Response.parse(jsonString);

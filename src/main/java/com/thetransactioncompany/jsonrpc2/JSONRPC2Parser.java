@@ -1,8 +1,6 @@
 package com.thetransactioncompany.jsonrpc2;
 
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -64,7 +62,7 @@ public class JSONRPC2Parser {
 	/**
 	 * Reusable JSON parser. Not thread-safe!
 	 */
-	private JSONParser parser;
+	private final JSONParser parser;
 	
 	
 	/**
@@ -226,8 +224,8 @@ public class JSONRPC2Parser {
 	 * @param version    The version parameter. Must not be {@code null}.
 	 * @param jsonString The original JSON string.
 	 *
-	 * @throws JSONRPC2Exception If the parameter is not a string that
-	 *                           equals "2.0".
+	 * @throws JSONRPC2ParseException If the parameter is not a string that
+	 *                                equals "2.0".
 	 */
 	private static void ensureVersion2(final Object version, final String jsonString)
 		throws JSONRPC2ParseException {
@@ -360,7 +358,7 @@ public class JSONRPC2Parser {
 		Object params = jsonObject.remove("params");
 		
 		
-		JSONRPC2Request request = null;
+		JSONRPC2Request request;
 		
 		if (params == null)
 			request = new JSONRPC2Request((String)method, id);
@@ -430,7 +428,7 @@ public class JSONRPC2Parser {
 		// Extract params
 		Object params = jsonObject.get("params");
 		
-		JSONRPC2Notification notification = null;
+		JSONRPC2Notification notification;
 		
 		if (params == null)
 			notification = new JSONRPC2Notification((String)method);
@@ -494,7 +492,7 @@ public class JSONRPC2Parser {
 		// Extract result/error and create response object
 		// Note: result and error are mutually exclusive
 		
-		JSONRPC2Response response = null;
+		JSONRPC2Response response;
 		
 		if (jsonObject.containsKey("result") && ! jsonObject.containsKey("error")) {
 			
@@ -530,7 +528,7 @@ public class JSONRPC2Parser {
 				throw new JSONRPC2ParseException("Invalid JSON-RPC 2.0 response: Error code missing or not an integer", jsonString);
 			}
 			
-			String errorMessage = null;
+			String errorMessage;
 
 			try {
 				errorMessage = (String)error.get("message");

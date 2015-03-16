@@ -1,9 +1,6 @@
 package com.thetransactioncompany.jsonrpc2.util;
 
 
-import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
-
-
 /**
  * The base abstract class for the JSON-RPC 2.0 parameter retrievers.
  *

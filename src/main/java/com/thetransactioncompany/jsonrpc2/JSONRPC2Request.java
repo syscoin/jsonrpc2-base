@@ -329,9 +329,9 @@ public class JSONRPC2Request extends JSONRPC2Message {
 	 * <p>This method was deprecated in version 1.30. Use
 	 * {@link #getPositionalParams} or {@link #getNamedParams} instead.
 	 *
-	 * @return The parameters as {@code List<Object>} for positional (JSON 
-	 *         array), {@code Map<String,Object>} for named (JSON object),
-	 *         or {@code null} if none.
+	 * @return The parameters as {@code List&lt;Object&gt;} for positional
+	 *         (JSON array), {@code Map&lt;String,Object&gt;} for named
+	 *         (JSON object), or {@code null} if none.
 	 */
 	@Deprecated
 	public Object getParams() {
@@ -385,25 +385,24 @@ public class JSONRPC2Request extends JSONRPC2Message {
 	 * {@link #setPositionalParams} or {@link #setNamedParams} instead.
 	 *
 	 * @param params The parameters. For positional (JSON array) pass a 
-	 *               {@code List<Object>}. For named (JSON object) pass a
-	 *               {@code Map<String,Object>}. If there are no 
-	 *               parameters pass {@code null}.
+	 *               {@code List&lt;Object&gt;}. For named (JSON object)
+	 *               pass a {@code Map&lt;String,Object&gt;}. If there are
+	 *               no parameters pass {@code null}.
 	 */
 	@Deprecated
 	@SuppressWarnings("unchecked")
 	public void setParams(final Object params) {
 	
-		if (params == null)
-			return;
-			
-		else if (params instanceof List)
-			positionalParams = (List<Object>)params;
-			
-		else if (params instanceof Map)
-			namedParams = (Map<String,Object>)params;
-			
-		else
+		if (params == null) {
+			positionalParams = null;
+			namedParams = null;
+		} else if (params instanceof List) {
+			positionalParams = (List<Object>) params;
+		} else if (params instanceof Map) {
+			namedParams = (Map<String, Object>) params;
+		} else {
 			throw new IllegalArgumentException("The request parameters must be of type List, Map or null");
+		}
 	}
 
 

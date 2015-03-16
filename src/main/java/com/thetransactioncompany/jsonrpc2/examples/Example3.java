@@ -36,13 +36,13 @@ public class Example3 {
 		
 		
 		// Parse the request
-		JSONRPC2Request request = null;
+		JSONRPC2Request request;
 		
 		try {
 			request = JSONRPC2Request.parse(json);
 			
 		} catch (JSONRPC2ParseException e) {
-			System.out.println(e);
+			System.err.println(e);
 			return;
 		}
 		
@@ -74,8 +74,7 @@ public class Example3 {
 		} catch (JSONRPC2Error e) {
 			// If a mandatory parameter is missing or there is a type mismatch
 			// you get an exception
-			System.out.println(e);
-			return;
+			System.err.println(e);
 		}
 	}
 }

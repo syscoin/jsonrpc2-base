@@ -22,13 +22,13 @@ public class Example2 {
 	 */
 	public static void parseMessage(String jsonString) {
 	
-		JSONRPC2Message msg = null;
+		JSONRPC2Message msg;
 		
 		try {
 			msg = JSONRPC2Message.parse(jsonString);
 			
 		} catch (JSONRPC2ParseException e) {
-			System.out.println(e);
+			System.err.println(e);
 			return;
 		}
 		

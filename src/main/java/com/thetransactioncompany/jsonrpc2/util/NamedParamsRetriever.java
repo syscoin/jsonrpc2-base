@@ -2,7 +2,6 @@ package com.thetransactioncompany.jsonrpc2.util;
 
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -99,13 +98,13 @@ public class NamedParamsRetriever
 		// Compose list of missing parameters
 		StringBuilder list = new StringBuilder();
 
-		for (int i=0; i < names.length; i++) {
+		for (String name : names) {
 
 			if (list.length() > 0)
 				list.append(',');
 
 			list.append('"');
-			list.append(names[i]);
+			list.append(name);
 			list.append('"');
 		}
 
@@ -269,11 +268,8 @@ public class NamedParamsRetriever
 	 * @return {@code true} if the parameter exists, else {@code false}.
 	 */
 	public boolean hasParam(final String name) {
-		
-		if (params.containsKey(name))
-			return true;
-		else
-			return false;
+
+		return params.containsKey(name);
 	}
 
 
@@ -351,11 +347,8 @@ public class NamedParamsRetriever
 		
 		// Any remaining keys that shouldn't be there?
 		int remainingKeys = paramsCopy.size();
-		
-		if (remainingKeys == 0)
-			return true;
-		else
-			return false;
+
+		return remainingKeys == 0;
 	}
 
 
@@ -379,7 +372,7 @@ public class NamedParamsRetriever
 	
 		Set<String> keyset = params.keySet();
 		
-		return keyset.toArray(new String[]{});
+		return keyset.toArray(new String[keyset.size()]);
 	}
 	
 	
@@ -1022,7 +1015,7 @@ public class NamedParamsRetriever
 		                                final boolean ignoreCase)
 		throws JSONRPC2Error {
 
-		String value = null;
+		String value;
 
 		if (defaultValue != null)
 			value = getOpt(name, String.class, defaultValue.toString());
@@ -1376,7 +1369,7 @@ public class NamedParamsRetriever
 			return null;
 		
 		try {
-			return list.toArray(new String[0]);
+			return list.toArray(new String[list.size()]);
 			
 		} catch (ArrayStoreException e) {
 			
