@@ -18,7 +18,7 @@ Requirements:
       efficent parsing).
 
 
-Visit the library home page for documentation, examples and updates:
+Visit the library home page for usage, examples and updates:
 
     http://software.dzhuvinov.com/json-rpc-2.0-base.html
 
