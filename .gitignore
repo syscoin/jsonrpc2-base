@@ -1,2 +1,4 @@
-/target/
+/.idea
+/*.iml
 /release.properties
+/target
