@@ -462,12 +462,15 @@ public class JSONRPC2Request extends JSONRPC2Message {
 	 */
 	public void setID(final Object id) {
 		
-		if (   id != null             &&
-		    ! (id instanceof Boolean) &&
-		    ! (id instanceof Number ) &&
-		    ! (id instanceof String )     )
-			throw new IllegalArgumentException("The request identifier must map to a JSON scalar");
-		this.id = id;
+		if (id == null            ||
+		    id instanceof Boolean ||
+		    id instanceof Number  ||
+		    id instanceof String
+        ) {
+    		this.id = id;
+        } else {
+			this.id = id.toString();
+        }
 	}
 	
 	
