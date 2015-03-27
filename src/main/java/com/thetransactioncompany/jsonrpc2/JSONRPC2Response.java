@@ -286,14 +286,6 @@ public class JSONRPC2Response extends JSONRPC2Message {
 	 */
 	public void setResult(final Object result) {
 		
-		if (   result != null             &&
-		    ! (result instanceof Boolean) &&
-		    ! (result instanceof Number ) &&
-		    ! (result instanceof String ) &&
-		    ! (result instanceof List   ) &&
-		    ! (result instanceof Map    )    )
-		    	throw new IllegalArgumentException("The result must map to a JSON type");
-		
 		// result and error are mutually exclusive
 		this.result = result;
 		this.error = null;
