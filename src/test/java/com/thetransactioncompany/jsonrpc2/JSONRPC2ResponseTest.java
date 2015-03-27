@@ -62,7 +62,7 @@ public class JSONRPC2ResponseTest extends TestCase {
 
 	public void testSetResultBean()
 		throws JSONRPC2ParseException {
-		
+
 		JSONRPC2Parser parser = new JSONRPC2Parser();
 
 		Object result = new JSONRPC2ResponseTest.Bean();
