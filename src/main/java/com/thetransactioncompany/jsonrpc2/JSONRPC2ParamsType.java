@@ -12,9 +12,6 @@ package com.thetransactioncompany.jsonrpc2;
  *     <li>{@link #OBJECT} The method takes named parameters, packed as a JSON 
  *         object, e.g. {@code {"param1":"val1", "param2":"val2", ...}}.
  * </ul>
- *
- * <p>The JSON-RPC 2.0 specification and user group forum can be found 
- * <a href="http://groups.google.com/group/json-rpc">here</a>.
  * 
  * @author Vladimir Dzhuvinov
  */

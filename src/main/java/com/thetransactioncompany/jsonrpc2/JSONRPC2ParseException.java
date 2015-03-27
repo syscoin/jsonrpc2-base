@@ -5,9 +5,6 @@ package com.thetransactioncompany.jsonrpc2;
  * Thrown to indicate an exception during the parsing of a JSON-RPC 2.0 
  * message string.
  *
- * <p>The JSON-RPC 2.0 specification and user group forum can be found 
- * <a href="http://groups.google.com/group/json-rpc">here</a>.
- *
  * @author Vladimir Dzhuvinov
  */
 public class JSONRPC2ParseException extends Exception {

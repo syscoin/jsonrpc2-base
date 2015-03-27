@@ -50,9 +50,6 @@ import net.minidev.json.parser.ParseException;
  *     object      <--->  java.util.Map
  *     null        <--->  null
  * </pre>
- *
- * <p>The JSON-RPC 2.0 specification and user group forum can be found 
- * <a href="http://groups.google.com/group/json-rpc">here</a>.
  * 
  * @author Vladimir Dzhuvinov
  */
