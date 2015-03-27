@@ -222,3 +222,8 @@ version 1.36 (2015-03-16)
 version 1.37 (2015-03-26)
     * Identifiers fall back to toString() if not an instance of Boolean, Number
       or String (iss #4).
+
+version 1.38 (2015-03-27)
+    * JSON Smart assumes the entire JSON serialisation of JSON-RPC 2.0 response
+      results.
+
