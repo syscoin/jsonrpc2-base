@@ -518,7 +518,7 @@ public class JSONRPC2Parser {
 			int errorCode;
 
 			try {
-				errorCode = ((Long)error.get("code")).intValue();
+				errorCode = ((Number)error.get("code")).intValue();
 
 			} catch (Exception e) {
 
