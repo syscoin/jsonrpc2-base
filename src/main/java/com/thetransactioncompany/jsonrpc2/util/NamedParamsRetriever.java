@@ -370,9 +370,9 @@ public class NamedParamsRetriever
 	 */
 	public String[] getNames() {
 	
-		Set<String> keyset = params.keySet();
+		Set<String> keySet = params.keySet();
 		
-		return keyset.toArray(new String[keyset.size()]);
+		return keySet.toArray(new String[keySet.size()]);
 	}
 	
 	
