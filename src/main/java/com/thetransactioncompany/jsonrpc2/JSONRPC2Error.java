@@ -57,7 +57,7 @@ public class JSONRPC2Error extends Exception {
 	/**
 	 * Serial version UID.
 	 */
-	private static final long serialVersionUID = 4682571044532698806l;
+	private static final long serialVersionUID = 4682571044532698806L;
 
 
 	/** 

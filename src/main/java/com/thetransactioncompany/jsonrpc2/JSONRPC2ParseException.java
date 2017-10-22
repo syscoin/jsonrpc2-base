@@ -13,7 +13,7 @@ public class JSONRPC2ParseException extends Exception {
 	/**
 	 * Serial version UID.
 	 */
-	private static final long serialVersionUID = 3376608778436136410l;
+	private static final long serialVersionUID = 3376608778436136410L;
 
 
 	/**
