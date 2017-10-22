@@ -227,3 +227,6 @@ version 1.38 (2015-03-27)
     * JSON Smart assumes the entire JSON serialisation of JSON-RPC 2.0 response
       results.
 
+version 1.38.1 (2017-10-22)
+    * Fixes parsing of error code integer in
+      JSONRPC2Parser.parseJSONRPC2Response (iss #5).
