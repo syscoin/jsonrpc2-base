@@ -50,9 +50,6 @@ import net.minidev.json.parser.ParseException;
  *     object      <--->  java.util.Map
  *     null        <--->  null
  * </pre>
- *
- * <p>The JSON-RPC 2.0 specification and user group forum can be found 
- * <a href="http://groups.google.com/group/json-rpc">here</a>.
  * 
  * @author Vladimir Dzhuvinov
  */
@@ -533,7 +530,7 @@ public class JSONRPC2Parser {
 			int errorCode;
 
 			try {
-				errorCode = ((Long)error.get("code")).intValue();
+				errorCode = ((Number)error.get("code")).intValue();
 
 			} catch (Exception e) {
 

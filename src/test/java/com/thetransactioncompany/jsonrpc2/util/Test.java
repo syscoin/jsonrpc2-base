@@ -1,14 +1,12 @@
 package com.thetransactioncompany.jsonrpc2.util;
 
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.thetransactioncompany.jsonrpc2.JSONRPC2Error;
+import com.thetransactioncompany.jsonrpc2.JSONRPC2ParseException;
+import com.thetransactioncompany.jsonrpc2.JSONRPC2Request;
 import junit.framework.TestCase;
-
-import com.thetransactioncompany.jsonrpc2.*;
 
 
 /**
@@ -277,9 +275,10 @@ public class Test extends TestCase {
 		}
 		
 		assertEquals(size, names.length);
-		
+
 		/*for (int i=0; i < names.length; i++)
 			assertEquals("param" + i, names[i]);*/
+
 		
 		
 		// Test check names method

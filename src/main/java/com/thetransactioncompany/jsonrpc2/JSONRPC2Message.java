@@ -51,9 +51,6 @@ import net.minidev.json.JSONObject;
  *     object      <--->  java.util.Map
  *     null        <--->  null
  * </pre>
- *
- * <p>The JSON-RPC 2.0 specification and user group forum can be found 
- * <a href="http://groups.google.com/group/json-rpc">here</a>.
  * 
  * @author Vladimir Dzhuvinov
  */
@@ -234,7 +231,6 @@ public abstract class JSONRPC2Message implements JSONAware {
 	 * @return The JSON object string representing this JSON-RPC 2.0 
 	 *         message.
 	 */
-	@Override
 	public String toJSONString() {
 	
 		return toString();

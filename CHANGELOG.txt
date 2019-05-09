@@ -218,3 +218,15 @@ version 1.35 (2013-04-07)
 version 1.36 (2015-03-16)
     * Cleans up code.
     * Upgrades to JSON Smart 1.3.1.
+
+version 1.37 (2015-03-26)
+    * Identifiers fall back to toString() if not an instance of Boolean, Number
+      or String (iss #4).
+
+version 1.38 (2015-03-27)
+    * JSON Smart assumes the entire JSON serialisation of JSON-RPC 2.0 response
+      results.
+
+version 1.38.1 (2017-10-22)
+    * Fixes parsing of error code integer in
+      JSONRPC2Parser.parseJSONRPC2Response (iss #5).
