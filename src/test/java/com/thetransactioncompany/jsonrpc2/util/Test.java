@@ -275,9 +275,10 @@ public class Test extends TestCase {
 		}
 		
 		assertEquals(size, names.length);
-		List<String> namesList = Arrays.asList(names);
-		for (int i=0; i < names.length; i++)
-			assertTrue(namesList.contains("param" + i));
+
+		/*for (int i=0; i < names.length; i++)
+			assertEquals("param" + i, names[i]);*/
+
 		
 		
 		// Test check names method
