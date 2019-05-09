@@ -125,7 +125,7 @@
                 <configuration>
                     <message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
                     <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
-                    <outputDirectory>core/target/mvn-repo</outputDirectory>
+                    <outputDirectory>target/mvn-repo</outputDirectory>
                     <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
                     <includes><include>**/*</include></includes>
                     <repositoryName>jsonrpc2-base</repositoryName>      <!-- github repo name -->
