@@ -211,8 +211,20 @@ public class JSONRPC2Parser {
 			
 		if (! (json instanceof Map))
 			throw new JSONRPC2ParseException("Invalid JSON-RPC 2.0 message: Message must be a JSON object", jsonString);
-		
-		return (Map<String,Object>)json;
+		Map<String,Object> answer = (Map<String,Object>)json;
+
+		if (answer.containsKey("error")){
+			if (answer.get("error")==null){
+				answer.remove("error");
+			}
+		}
+		if (answer.containsKey("result")){
+			if (answer.get("result")==null){
+				answer.remove("result");
+			}
+		}
+
+		return answer;
 	}
 	
 	
